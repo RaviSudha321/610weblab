@@ -115,5 +115,7 @@
     }
     body .newsletter_sec .newsletter_inner {
         padding: 30px 25px 35px;
+        max-width: 470px;
+        margin-inline: auto;
     }  
 }
