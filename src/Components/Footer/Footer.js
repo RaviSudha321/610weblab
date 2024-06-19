@@ -88,7 +88,7 @@ function Footer(){
                             </div>
                         </div>
                         <div className="social_links">
-                            <h3 className="menu_title">WE ARE SOCIAL</h3>
+                            <h3 className="menu_title">We Are Social</h3>
                             <ul>
                                 <li>
                                     <a href="#" target="_blank">

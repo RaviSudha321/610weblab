@@ -23,8 +23,14 @@
     margin-top: 35px;
     color: #fff;
 }
+.footer_logo img {
+    max-width: 235px;
+}
 .hire_sec {
     margin-top: 30px;
+}
+.hire_sec img {
+    max-width: 260px;
 }
 .hire_sec h3 {
     font-size: 25px;

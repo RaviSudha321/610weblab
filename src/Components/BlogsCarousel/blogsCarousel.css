@@ -5,6 +5,7 @@
 }
 .blogs_sec .container-fluid {
     max-width: 1590px;
+    margin-inline: auto;
 }
 .blog_sec_header {
     display: flex;
