@@ -24,6 +24,12 @@
     font-size: 20px;
     line-height: 1.5;
     font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s linear;
+}
+.team_filters li:hover,
+.team_filters li.active {
+    color: #73c5eb;
 }
 .team_members {
     margin-top: 40px;
@@ -31,6 +37,9 @@
     grid-template-columns: repeat(4, 1fr);
     grid-column-gap: 24px;
     grid-row-gap: 30px;
+}
+.member_box.hidden {
+    display: none;
 }
 .member_name {
     margin-top: 15px;
