@@ -2,7 +2,21 @@
     background-color: #F6FCFF;
     padding: 70px 0 120px;
 }
-.testimonials_sec marquee span {
+.marquee {
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+    width: 100%;
+}
+@keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+}
+.marquee span {
     font-size: 80px;
     line-height: 1;
     font-weight: 700;
@@ -13,6 +27,7 @@
     gap: 34px;
     text-transform: uppercase;
     margin-inline: 27px;
+    animation: marquee 10s linear infinite;
 }
 .testimonials {
     margin-top: 45px;
@@ -79,7 +94,7 @@
         max-width: unset;
         width: calc(100% - 300px);
     }
-    section.testimonials_sec marquee span {
+    .testimonials_sec .marquee span {
         font-size: 72px;
     }
 }
@@ -105,7 +120,7 @@
     .testimonial_content .testimonial_title {
         font-size: 30px;
     }
-    section.testimonials_sec marquee span {
+    .testimonials_sec .marquee span {
         font-size: 66px;
     }
 }
@@ -141,10 +156,10 @@
     .testimonial_item .testimonial_content .testimonial_title {
         font-size: 28px;
     }
-    body .testimonials_sec marquee span {
+    body .testimonials_sec .marquee span {
         font-size: 56px;
     }
-    .testimonials_sec marquee span svg {
+    .testimonials_sec .marquee span svg {
         width: 30px;
     }
 }

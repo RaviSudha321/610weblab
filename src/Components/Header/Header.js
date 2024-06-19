@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import './header.css';
 import Button from "../Button/Button";
 import { useEffect, useState } from 'react';
@@ -7,6 +7,7 @@ import { RiCloseLargeFill } from "react-icons/ri";
 
 function Header(){
 
+    const {pathname} = useLocation();
     const [headerClass, setHeaderClass] = useState('');
     const [activeMenu, setActiveMenu] = useState(false);
     const [activeSubMenus, setActiveSubMenus] = useState([]);
@@ -21,6 +22,10 @@ function Header(){
         })
     }, [headerClass]);
 
+    useEffect(()=>{
+        setActiveMenu(false);
+    }, [pathname])
+
     const handleMobileSubMenu = (index) => {
         if (activeSubMenus.includes(index)) {
             // Remove the item and update the state
@@ -30,8 +35,6 @@ function Header(){
             setActiveSubMenus((subMenus)=>[...subMenus, index])
         }
     }
-
-    console.log(activeSubMenus)
 
     return(
         <>

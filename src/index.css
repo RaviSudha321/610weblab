@@ -141,6 +141,7 @@ form#discuss_form {
 #discuss_form .form_field {
   width: calc(50% - 10px);
   position: relative;
+  margin: 0;
 }
 #discuss_form .form_field.fullwidth {
   width: 100%;
@@ -400,6 +401,9 @@ form#discuss_form {
   }
   .discuss_content .success_counter_item {
     width: calc(50% - 17px);
+  }
+  form#discuss_form .form_field {
+    width: 100%;
   }
 }
 
