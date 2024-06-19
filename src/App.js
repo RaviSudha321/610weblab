@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from "react-router-dom";
+import Copyright from "./Components/Copyright/Copyright";
+import Footer from "./Components/Footer/Footer";
+import Header from "./Components/Header/Header";
+import About from "./Pages/About/About";
+import Home from "./Pages/Home/Home";
+import ScrollToTop from "./Components/ScrollToTop/ScrollToTop";
+import Portfolio from "./Pages/Portfolio/Portfolio";
+import Blog from "./Pages/Blog/Blog";
+import NotFound from "./Pages/NotFound/NotFound";
+import Contact from "./Pages/Contact/Contact";
+import WebDesign from "./Pages/WebDesign/WebDesign";
+import Careers from './Pages/Careers/Careers'
+import SingleBlog from "./Pages/SingleBlog/SingleBlog";
+import Search from "./Pages/Search/Search";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ScrollToTop />
+        <Header />
+        <div id="page_content" className="page_content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about-us" element={<About />} />
+            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/contact-us" element={<Contact />} />
+            <Route path="/web-design" element={<WebDesign />} />
+            <Route path="/careers" element={<Careers />} />
+            <Route path="/single-blog" element={<SingleBlog />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/*" element={<NotFound />} />
+          </Routes>
+        </div>
+        <Footer />
+      <Copyright />
     </div>
   );
 }
 
-export default App;
+export default App; 
