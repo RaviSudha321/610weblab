@@ -3,11 +3,14 @@ import './header.css';
 import Button from "../Button/Button";
 import { useEffect, useState } from 'react';
 import { FaBarsStaggered } from "react-icons/fa6";
+import { RiCloseLargeFill } from "react-icons/ri";
 
 function Header(){
 
-    const[headerClass, setHeaderClass] = useState('');
-
+    const [headerClass, setHeaderClass] = useState('');
+    const [activeMenu, setActiveMenu] = useState(false);
+    const [activeSubMenus, setActiveSubMenus] = useState([]);
+    
     useEffect(()=>{
         window.addEventListener('scroll', function(){
             if(window.scrollY > 20){
@@ -16,7 +19,19 @@ function Header(){
                 setHeaderClass('');
             }
         })
-    }, [headerClass])
+    }, [headerClass]);
+
+    const handleMobileSubMenu = (index) => {
+        if (activeSubMenus.includes(index)) {
+            // Remove the item and update the state
+            setActiveSubMenus(activeSubMenus.filter(item => item !== index));
+        } else {
+            // Add the item and update the state
+            setActiveSubMenus((subMenus)=>[...subMenus, index])
+        }
+    }
+
+    console.log(activeSubMenus)
 
     return(
         <>
@@ -29,7 +44,7 @@ function Header(){
                             </div>
                         </div>
                         <div className="header_right_col">
-                            <div className='header_right_col_content'>
+                            <div className={`header_right_col_content ${activeMenu ? 'active' : ''}`}>
                                 <div className="header_menu">
                                     <nav className="navigation">
                                         <ul className='menu'>
@@ -39,8 +54,8 @@ function Header(){
                                             <li>
                                                 <NavLink to="/web-design">Web Design</NavLink>
                                             </li>
-                                            <li className='has_sub_menu'>
-                                                <NavLink to="/web-development">
+                                            <li className={`has_sub_menu ${activeSubMenus.includes(3) ? 'active_sub_menu' : ''}`}>
+                                                <NavLink to="/web-development" onClick={(e)=>{e.preventDefault(); handleMobileSubMenu(3)}}>
                                                     Web Development
                                                     <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <g clip-path="url(#clip0_1347_921)">
@@ -62,8 +77,8 @@ function Header(){
                                                     </li>
                                                 </ul>
                                             </li>
-                                            <li className='has_sub_menu'>
-                                                <NavLink to="/digital-marketing">
+                                            <li className={`has_sub_menu ${activeSubMenus.includes(4) ? 'active_sub_menu' : ''}`}>
+                                                <NavLink to="/digital-marketing" onClick={(e)=>{e.preventDefault(); handleMobileSubMenu(4)}}>
                                                     Digital Marketing
                                                     <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <g clip-path="url(#clip0_1347_921)">
@@ -113,8 +128,10 @@ function Header(){
                                 link="/contact-us"
                                 />
                             </div>
-                            <span className='menu_toggle'>
-                                <FaBarsStaggered />
+                            <span className='menu_toggle' onClick={()=>{setActiveMenu((prevState)=>!prevState)}}>
+                                {
+                                    activeMenu ? <RiCloseLargeFill /> : <FaBarsStaggered />
+                                }
                             </span>
                         </div>
                     </div>
