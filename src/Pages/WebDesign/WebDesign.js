@@ -8,6 +8,8 @@ import ImageText from '../../Components/ImageText/ImageText';
 import IconList from '../../Components/IconList/IconList';
 import PageBanner from '../../Components/PageBanner/PageBanner';
 import WebServiceBox from '../../Components/WebServiceBox/WebServiceBox';
+import { Helmet } from "react-helmet";
+
 
 function WebDesign(){
 
@@ -18,6 +20,9 @@ function WebDesign(){
     
     return(
         <div className="web_design_page">
+            <Helmet>
+                <title>Website Design Page</title>
+            </Helmet>
             <PageBanner 
             title="Website Design Services"
             description="Crafting a successful online identity demands the right tools and a dedicated team behind you. Our experts will build a visually stunning website tailored to your business goals. We ensure your custom website authenticates your brand and positions you for unparalleled success in the digital landscape."

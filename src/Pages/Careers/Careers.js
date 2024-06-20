@@ -5,10 +5,14 @@ import PageBanner from "../../Components/PageBanner/PageBanner";
 import SelectionProcess from "../../Components/SelectionProcess/SelectionProcess";
 import Testimonials from "../../Components/Testimonials/Testimonials";
 import WorkCulture from "../../Components/WorkCulture/WorkCulture";
+import { Helmet } from "react-helmet";
 
 function Careers(){
     return(
         <div className="careers_page">
+            <Helmet>
+                <title>Career Page</title>
+            </Helmet>
             <PageBanner
             title="Join Our Team!"
             description="Check out our current job openings and shoot us your resume, links or whatever best tells your story."

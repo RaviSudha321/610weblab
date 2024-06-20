@@ -97,6 +97,7 @@
     background-color: var(--light-blue);
     color: #fff;
     border-bottom: 1px solid #fff;
+    text-align: left;
 }
 .header_menu ul.sub_menu li a:hover {
     background-color: var(--dark-blue);

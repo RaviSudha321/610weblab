@@ -4,6 +4,8 @@ import Testimonials from "../../Components/Testimonials/Testimonials";
 import ContactBox from "../../Components/ContactBox/ContactBox";
 import { FaXTwitter } from "react-icons/fa6";
 import SuccessCounter from "../../Components/SuccessCounter/SuccessCounter";
+import { Helmet } from "react-helmet";
+
 
 function Contact(){
 
@@ -19,7 +21,10 @@ function Contact(){
     ];
 
     return(
-        <>
+        <div className="career_page">
+            <Helmet>
+                <title>Contact Page</title>
+            </Helmet>
             <PageBanner 
             title="Get in Touch"
             description='We help every type of Business to Grow the Audience "Online" with Organic and Paid methods.'
@@ -129,7 +134,7 @@ function Contact(){
 
             <CallToAction />
             <Testimonials />
-        </>
+        </div>
     )
 }
 

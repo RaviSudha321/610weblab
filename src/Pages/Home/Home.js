@@ -14,10 +14,15 @@ import Services from "../../Components/Services/Services";
 import Recognized from "../../Components/Recognized/Recognized";
 import HomeBanner from "../../Components/HomeBanner/HomeBanner";
 import Ratings from "../../Components/Ratings/Ratings";
+import { Helmet } from "react-helmet";
+
 
 function Home(){
     return(
         <div className="home_page">
+            <Helmet>
+                <title>Home Page</title>
+            </Helmet>
             <HomeBanner />
             <Ratings />
             <Recognized />
