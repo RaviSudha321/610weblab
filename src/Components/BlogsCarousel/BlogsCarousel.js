@@ -49,7 +49,7 @@ function BlogsCarousel(){
                         </div>
                         <Button 
                         title="All Blogs"
-                        link="#"
+                        link="/blog"
                         />
                     </div>
                 </div>

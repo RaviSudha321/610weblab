@@ -36,6 +36,9 @@
 .image_text_content.image_left {
     flex-direction: row-reverse;
 }
+.image_left .image_area {
+    text-align: left;
+}
 .image_text_content.image_left .image_text_left_col {
     padding-right: 0;
     padding-left: 30px;
@@ -44,6 +47,10 @@
     padding-left: 0;
     padding-right: 30px;
 }
+.above_content strong {
+    font-weight: 600;
+}
+
 
 @media (max-width:1280px){
     .image_text_left_col .bottom_content {
@@ -54,6 +61,12 @@
 @media (min-width:768px) and (max-width:1024px){
     .image_text_sec .sec_title {
         font-size: 30px;
+    }
+}
+
+@media (max-width:1024px){
+    .image_text_content .above_content {
+        text-align: center;
     }
 }
 

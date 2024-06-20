@@ -2,7 +2,7 @@ import CallToAction from "../../Components/CallToAction/CallToAction";
 import PageBanner from "../../Components/PageBanner/PageBanner";
 import Testimonials from "../../Components/Testimonials/Testimonials";
 import ContactBox from "../../Components/ContactBox/ContactBox";
-import { FaXTwitter } from "react-icons/fa6";
+import { FaXTwitter, FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa6";
 import SuccessCounter from "../../Components/SuccessCounter/SuccessCounter";
 import { Helmet } from "react-helmet";
 
@@ -11,12 +11,20 @@ function Contact(){
 
     const socialMedia = [
         {
-            icon:<FaXTwitter />, 
-            link:'https://www.instagram.com/'
+            icon:<FaFacebookF />, 
+            link:'https://www.facebook.com/610weblab/'
         },
         {
             icon:<FaXTwitter />,    
-            link:'https://www.facebook.com/'
+            link:'https://twitter.com/610Weblab/'
+        },
+        {
+            icon:<FaInstagram  itter />,    
+            link:'https://www.instagram.com/610weblab/'
+        },
+        {
+            icon:<FaLinkedinIn />,    
+            link:'https://www.linkedin.com/company/610-web-lab'
         },
     ];
 
@@ -47,14 +55,14 @@ function Contact(){
                         description="Give us a call direclty, our Sales team will catch you and will get back to you."
                         />
                         <ContactBox
-                        title="Phone Number"
-                        link="tel:918427814610"
-                        linkText="91 8427-8146-10"
-                        description="Give us a call direclty, our Sales team will catch you and will get back to you."
+                        title="Email Address"
+                        link="mailto:support@610weblab.com"
+                        linkText="support@610weblab.com"
+                        description="Send us a detailed message. Our Team will get back to you with the Details."
                         />
                         <ContactBox
-                        title="Phone Number"
-                        description="Give us a call direclty, our Sales team will catch you and will get back to you."
+                        title="Social Media"
+                        description="Want to connect on Social Media! We're already here."
                         socialMedia={socialMedia}
                         />
                     </div>

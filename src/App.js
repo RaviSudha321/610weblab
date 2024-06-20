@@ -13,6 +13,11 @@ import WebDesign from "./Pages/WebDesign/WebDesign";
 import Careers from './Pages/Careers/Careers'
 import SingleBlog from "./Pages/SingleBlog/SingleBlog";
 import Search from "./Pages/Search/Search";
+import WebDevelopment from "./Pages/WebDevelopment/WebDevelopment";
+import DigitalMarketing from "./Pages/DigitalMarketing/DigitalMarketing";
+import PhpDevelopment from "./Pages/PhpDevelopment/PhpDevelopment";
+import ShopifyDevelopment from "./Pages/ShopifyDevelopment/ShopifyDevelopment";
+import OpenSourceDevelopment from "./Pages/OpenSourceDevelopment/OpenSourceDevelopment";
 
 function App() {
   return (
@@ -30,6 +35,11 @@ function App() {
             <Route path="/careers" element={<Careers />} />
             <Route path="/single-blog" element={<SingleBlog />} />
             <Route path="/search" element={<Search />} />
+            <Route path="/web-development" element={<WebDevelopment />} />
+            <Route path="/digital-marketing" element={<DigitalMarketing />} />
+            <Route path="/php-development" element={<PhpDevelopment />} />
+            <Route path="/shopify-development" element={<ShopifyDevelopment />} />
+            <Route path="/open-source-development" element={<OpenSourceDevelopment />} />
             <Route path="/*" element={<NotFound />} />
           </Routes>
         </div>

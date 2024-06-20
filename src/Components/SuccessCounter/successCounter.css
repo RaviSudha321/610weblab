@@ -38,3 +38,9 @@
         font-size: 32px;
     }
 }
+
+@media (max-width:767px){
+    .success_content {
+        min-width: 152px;
+    }
+}

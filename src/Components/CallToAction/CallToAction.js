@@ -16,7 +16,7 @@ function CallToAction(){
                         <div className='cta_btn'>
                             <Button 
                             title="Let’s Get Started"
-                            link="#"
+                            link="/contact-us"
                             />
                         </div>
                     </div>

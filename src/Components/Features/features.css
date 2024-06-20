@@ -35,10 +35,13 @@
     padding: 13px;
     background-color: #fff;
     clip-path: polygon(50% 0, 100% 27%, 100% 73%, 50% 100%, 0 73%, 0 27%);
+    height: 100%;
 }
 .feature_box_content_inner {
     clip-path: polygon(50% 0, 100% 27%, 100% 73%, 50% 100%, 0 73%, 0 27%);
     padding: 25px 14px 55px;
+    align-content: center;
+    height: 100%;
 }
 .feature_box:nth-child(-n+3) {
     width: calc(25% - 19px);

@@ -13,17 +13,8 @@
 }
 .tech_tag_description {
     width: 50%;
-    position: relative;
     padding-left: 40px;
-}
-.tech_tag_description:before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 1px;
-    height: calc(100% - 40px);
-    background-color: #CFCFCF;
+    border-left: 1px solid #CFCFCF;
 }
 
 @media (max-width:1024px){
@@ -47,13 +38,7 @@
         padding-top: 30px;
         text-align: center;
         margin-top: 30px;
-    }
-    .tech_tag_content .tech_tag_description::before {
-        bottom: auto;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        height: 1px;
-        width: 220px;
+        border-left: 0;
+        border-top: 1px solid #CFCFCF;
     }
 }

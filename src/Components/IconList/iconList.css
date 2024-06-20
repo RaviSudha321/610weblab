@@ -6,8 +6,7 @@
     color: var(--text-color);
 }
 .iconlist_item {
-    display: flex;
-    align-items: center;
+    display: flex;;
     gap: 10px;
     line-height: 1.87;
     color: var(--text-color);

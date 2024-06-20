@@ -83,23 +83,27 @@
     position: absolute;
     top: 100%;
     width: 100%;
+    min-width: 200px;
     padding-top: 10px;
 }
-.header_menu ul.sub_menu li a {
-    display: block;
-    padding: 10px 15px;
-    background-color: var(--light-blue);
-    color: #fff;
+.header_menu ul li a path {
+    transition: all 0.2s linear;
+}
+.header_menu ul li a:hover path, 
+.header_menu ul li a.active path {
+    fill: var(--light-blue);
 }
 .header_menu ul.sub_menu li a {
     display: block;
     padding: 10px 15px;
     background-color: var(--light-blue);
     color: #fff;
+    font-size: 15px;
     border-bottom: 1px solid #fff;
     text-align: left;
 }
-.header_menu ul.sub_menu li a:hover {
+.header_menu ul.sub_menu li a:hover,
+.header_menu ul.sub_menu li a.active {
     background-color: var(--dark-blue);
 }
 .header_content .menu_toggle {
@@ -163,13 +167,14 @@
         width: 400px;
         max-width: 70%;
         background-color: var(--dark-blue);
-        padding: 30px;
+        padding: 20px 0 30px;
         flex-direction: column;
         align-items: flex-start;
         height: 100vh;
         justify-content: flex-start;
         transform: translateX(-101%);
         transition: all 0.2s linear;
+        overflow-y: auto;
     }
     .header_content .header_right_col_content.active {
         transform: translateX(0);
@@ -177,11 +182,20 @@
     .header_content .header_menu ul {
         flex-direction: column;
         align-items: flex-start;
+        gap: 0;
     }
     body .header_content .header_menu ul li a {
         font-size: 16px;
         color: #fff;
         justify-content: space-between;
+        display: flex;
+        padding: 10px 25px;
+    }
+    body .header_content .header_menu ul li a.active {
+        background-color: var(--light-blue);
+    }
+    .header_right_col_content .global_btn {
+        padding-inline: 25px;
     }
     .header_content .header_menu ul li a path {
         fill: #fff;
@@ -197,7 +211,6 @@
     body .header_menu li.active_sub_menu a + .sub_menu, 
     body .header_menu li.active_sub_menu .sub_menu {
         height: auto;
-        padding-top: 10px !important;
     }
     .header_menu {
         width: 100%;
@@ -210,6 +223,7 @@
     .header_content .header_menu ul.sub_menu li a {
         background-color: transparent;
         border: 0;
+        padding-left: 40px;
     }
     .header_content .global_btn a {
         color: #fff;

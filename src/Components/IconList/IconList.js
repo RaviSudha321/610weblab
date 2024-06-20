@@ -14,14 +14,6 @@ function IconList({title, icon, items}){
                         </li>
                     )
                 })}
-                <li className='iconlist_item'>
-                    <span className='item_icon'>{icon && icon}</span>
-                    <span className='item_title'>Research and Discovery</span>
-                </li>
-                <li className='iconlist_item'>
-                    <span className='item_icon'>{icon && icon}</span>
-                    <span className='item_title'>Research and Discovery</span>
-                </li>
             </ul>
         </div>
     )

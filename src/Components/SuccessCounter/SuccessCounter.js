@@ -24,8 +24,8 @@ function SuccessCounter(){
                     </svg>
                 </div>
                 <div className="success_content">
-                    <span className='counter_number'>300+</span>
-                    <div className='counter_title'>Successful Projects</div>
+                    <span className='counter_number'>97+</span>
+                    <div className='counter_title'>Success Rate</div>
                 </div>
             </div>
             <div className='success_counter_item'>
@@ -36,8 +36,8 @@ function SuccessCounter(){
                     </svg>
                 </div>
                 <div className="success_content">
-                    <span className='counter_number'>300+</span>
-                    <div className='counter_title'>Successful Projects</div>
+                    <span className='counter_number'>1500+</span>
+                    <div className='counter_title'>Happy Clients</div>
                 </div>
             </div>
         </div>
