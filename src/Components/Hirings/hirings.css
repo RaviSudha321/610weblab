@@ -23,7 +23,8 @@
     border-radius: 5px;
     cursor: pointer;
 }
-.hiring_cats li:hover {
+.hiring_cats li:hover,
+.hiring_cats li.active {
     background-color: var(--light-blue);
     color: #fff;
 }
@@ -110,6 +111,7 @@
     }    
     .hiring_item .hiring_description {
         text-align: center;
+        order: inherit;
     }
     body .hiring_actions .global_btn {
         text-align: center;

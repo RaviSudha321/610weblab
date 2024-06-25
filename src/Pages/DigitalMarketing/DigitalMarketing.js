@@ -7,8 +7,29 @@ import TechTag from "../../Components/TechTagSection/TechTag";
 import Testimonials from "../../Components/Testimonials/Testimonials";
 import WebServiceBox from "../../Components/WebServiceBox/WebServiceBox";
 import ImageText from '../../Components/ImageText/ImageText';
+import { useEffect, useState } from 'react';
 
 function DigitalMarketing(){
+
+    const [portfolios, setPortfolios] = useState([]);
+
+    const getPortfolios = async()=>{
+        try {
+            const response = await fetch(process.env.REACT_APP_REST_API_URL+'/weblab-projects?order=asc&_embed');
+            if(!response.ok){
+                throw new Error('Network response was not ok: portfolios');
+            }
+            const data = await response.json();
+            setPortfolios(data);
+        }
+        catch (error){
+            console.log('portfolios error:', error)
+        }
+    }
+
+    useEffect(()=>{
+        getPortfolios();
+    },[]);
 
     const techDescription = [
         "Looking to give your business an instant boost? At 610 Web Lab, our digital marketing agency is here to help you soar to new heights. We specialize in crafting tailored marketing strategies that drive traffic, increase engagement, and maximize sales. Whether it's SEO, social media, or content marketing, we’ve got the tools and expertise to elevate your brand.",
@@ -97,43 +118,35 @@ function DigitalMarketing(){
                     </div>
                 </div>
             </section>
-            <section className="portfolios_sec">
-                <div className="container">
-                    <div className="portfolio_content">
-                        <h2 className="sec_title">Web Portfolio</h2>
-                        <div className="portfolio_boxes">
-                            <PortfolioBox
-                            title="Stretch Marks Web Template"
-                            imageUrl="images/portfolio.webp"
-                            />
-                            <PortfolioBox
-                            title="Stretch Marks Web Template"
-                            imageUrl="images/portfolio.webp"
-                            />
-                            <PortfolioBox
-                            title="Stretch Marks Web Template"
-                            imageUrl="images/portfolio.webp"
-                            />
-                            <PortfolioBox
-                            title="Stretch Marks Web Template"
-                            imageUrl="images/portfolio.webp"
-                            />
-                            <PortfolioBox
-                            title="Stretch Marks Web Template"
-                            imageUrl="images/portfolio.webp"
-                            />
-                            <PortfolioBox
-                            title="Stretch Marks Web Template"
-                            imageUrl="images/portfolio.webp"
+            
+            {
+                portfolios.length > 0 &&
+                <section className="portfolios_sec">
+                    <div className="container">
+                        <div className="portfolio_content">
+                            <h2 className="sec_title">Web Portfolio</h2>
+                            <div className="portfolio_boxes">
+                                {
+                                    portfolios.map((item, index)=>{
+                                        return(
+                                            <PortfolioBox
+                                            title={item.title.rendered}
+                                            imageUrl={item._embedded['wp:featuredmedia']['0'].source_url}
+                                            key={index}
+                                            /> 
+                                        )
+                                    })
+                                }
+                            </div>
+                            <Button 
+                            title="View Portfolio"
+                            link="/portfolio"
                             />
                         </div>
-                        <Button 
-                        title="View Portfolio"
-                        link="/portfolio"
-                        />
                     </div>
-                </div>
-            </section>
+                </section>
+            }
+
             <CallToAction />
             <Testimonials />
         </div>

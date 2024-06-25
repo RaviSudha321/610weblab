@@ -2,26 +2,25 @@ import Button from '../Button/Button';
 import './hiringItem.css';
 
 
-function HiringItem(){
+function HiringItem({item, activeCategory}){
+    
     return(
-        <div className='hiring_item'>
+        <div className={activeCategory == item._embedded['wp:term']['0']['0'].slug || activeCategory == 'all' ? 'hiring_item active' : 'hiring_item hidden'}>
             <div className='vacancy_titles'>
-                <h3 className='designation'>WordPress Developer</h3>
+                <h3 className='designation' dangerouslySetInnerHTML={{__html: item.title.rendered}}></h3>
                 <p className='sub_title'>Experience</p>
-                <span className='experience'>2 Years</span>
+                <span className='experience'>{item.acf.experience} Years</span>
             </div>
             <div className='vacancy_positions'>
                 <p className='sub_title'>Positions</p>
-                <span className='positions'>2</span>
+                <span className='positions'>{item.acf.positions}</span>
             </div>
-            <div className='hiring_description'>
-                <p>We are looking for WordPress Developer who are interested in experimentation and challenging the convention for our projects.</p>
-            </div>
+            <div className='hiring_description' dangerouslySetInnerHTML={{__html: item.content.rendered}}></div>
             <div className='hiring_actions'>
                 <div className='apply_btn'>
                     <Button
                     title="Apply Now"
-                    link="#"
+                    link={item.acf.apply_button_link}
                     icon={<svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_1628_1093)">
                         <path d="M1.78448 0.0779819C0.943664 0.324076 0.279211 1.00083 0.0618284 1.83345C0.00850812 2.03853 0.000304994 3.17056 0.000304994 10.4918C0.000304994 19.8434 -0.0202028 19.1133 0.27511 19.704C0.467883 20.0854 0.898547 20.5202 1.2923 20.7211C1.8378 21.0042 1.8378 21.0042 4.28234 20.9918C6.42335 20.9795 6.47667 20.9795 6.58741 20.8934C6.64894 20.8483 6.75968 20.7417 6.8253 20.6555C6.94425 20.512 6.95245 20.4751 6.95245 20.1797C6.95245 19.8844 6.94425 19.8475 6.8253 19.704C6.5464 19.3553 6.73507 19.384 4.37667 19.3594C2.42843 19.3389 2.26847 19.3348 2.13312 19.261C1.93214 19.1543 1.85011 19.0764 1.74757 18.8877L1.66144 18.7237V10.5001C1.66144 2.54302 1.66554 2.27232 1.73937 2.13286C1.84601 1.93189 1.92394 1.84986 2.11261 1.74732C2.27667 1.66118 2.28077 1.66118 6.06241 1.64888L9.84406 1.63658V3.05982C9.84406 4.64302 9.85636 4.74556 10.1189 5.26646C10.3116 5.6479 10.7423 6.08267 11.136 6.28365C11.6487 6.55025 11.7595 6.56255 13.3468 6.56255H14.7659V6.9481C14.7659 7.37876 14.8028 7.51001 14.9628 7.68638C15.295 8.03911 15.8775 8.03911 16.2097 7.68638C16.3901 7.4895 16.4066 7.39107 16.4066 6.4149C16.4066 5.65201 16.3943 5.47154 16.3409 5.36079C16.2548 5.18853 11.3575 0.274857 11.1196 0.118998L10.9351 5.14984e-05L6.48487 0.00415421C2.36691 0.00415421 2.01007 0.0123577 1.78448 0.0779819ZM13.4452 4.91783C13.3919 4.92603 13.0761 4.92193 12.7357 4.91372C11.9564 4.89322 11.7882 4.81939 11.5831 4.42974C11.5216 4.31079 11.5052 4.16314 11.4929 3.56841L11.4765 2.85064L12.506 3.87603C13.3796 4.74146 13.5232 4.90552 13.4452 4.91783Z" fill="#30A9E0"/>

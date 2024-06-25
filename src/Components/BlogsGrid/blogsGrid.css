@@ -30,6 +30,9 @@
     justify-content: center;
     padding: 6px 15px;
 }
+.pagination_items li a {
+    cursor: pointer;
+}
 .pagination_items li a:hover,
 .pagination_items li span {
     background-color: var(--light-blue);

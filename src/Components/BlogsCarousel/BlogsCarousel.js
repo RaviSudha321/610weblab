@@ -1,7 +1,7 @@
 import Button from '../Button/Button';
 import BlogBox from '../BlogBox/BlogBox';
 import './blogsCarousel.css';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css'; 
@@ -38,6 +38,27 @@ function BlogsCarousel(){
         }
     };
     
+    const [blogs, setBlogs] = useState([]);
+
+      
+    const getBlogs = async () => {
+      try{
+        const response = await fetch(process.env.REACT_APP_REST_API_URL+'/posts?_embed');
+        if(!response.ok){
+          throw new Error('Network response was not ok');
+      }
+        const data = await response.json();
+        setBlogs(data);
+      }
+      catch (error) {
+        console.log('blogs not fetch', error);
+      }
+    } 
+    
+    useEffect(()=>{
+      getBlogs();
+    },[])
+
     return(
         <section className='blogs_sec'>
             <div className='container-fluid'>
@@ -53,17 +74,18 @@ function BlogsCarousel(){
                         />
                     </div>
                 </div>
-                <OwlCarousel className="owl-theme blogs_carousel" {...options}>  
-                    <BlogBox />
-                    <BlogBox />
-                    <BlogBox />
-                    <BlogBox />
-                </OwlCarousel>
-                {/* <div className='blogs_list'>
-                   <BlogBox />
-                   <BlogBox />
-                   <BlogBox />
-                </div> */}
+                {
+                  blogs.length > 0 &&
+                  <OwlCarousel className="owl-theme blogs_carousel" {...options}>  
+                  {
+                    blogs.map((blog, index)=>{
+                      return(
+                        <BlogBox blog={blog} key={index} />
+                      )
+                    })
+                  }
+                  </OwlCarousel>
+                }
             </div>
         </section>
     )

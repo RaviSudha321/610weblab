@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 
 
 function Projects(){
-    
+
     const options = {
         loop: true,
         margin: 27,
@@ -36,34 +36,53 @@ function Projects(){
           }
         }
     };
+
+    const [projects, setProjects] = useState([]);
+
+    const getProjects = async () => {
+        try{
+            const response = await fetch(`${process.env.REACT_APP_REST_API_URL}/weblab-projects?_embed&order=asc`);
+
+            if(!response.ok){
+                throw new Error('Network response was not ok');
+            }
+            const data = await response.json();
+            setProjects(data);
+        } catch (error) {
+            console.error('Failed to fetch projects:', error);
+        }
+    }
+
+    useEffect(()=>{
+        getProjects();
+    }, []);
+    console.log(projects)
     
     return(
         <section className='projects_sec'>
             <div className='container'>
                 <h3 className='sec_sub_title'>Recent Projects</h3>
                 <h2 className='sec_title'>Look at latest works gallery</h2>
-                <OwlCarousel className="projects_carousel" {...options}>
-                    <div className='project_item'>
-                        <div className='project_img'>
-                            <img src="images/project-1.webp" alt="image" />
-                        </div>
-                    </div>
-                    <div className='project_item'>
-                        <div className='project_img'>
-                            <img src="images/project-1.webp" alt="image" />
-                        </div>
-                    </div>
-                    <div className='project_item'>
-                        <div className='project_img'>
-                            <img src="images/project-1.webp" alt="image" />
-                        </div>
-                    </div>
-                    <div className='project_item'>
-                        <div className='project_img'>
-                            <img src="images/project-1.webp" alt="image" />
-                        </div>
-                    </div>
-                </OwlCarousel>
+                {
+                    projects.length > 0 &&
+
+                        <OwlCarousel className="projects_carousel" {...options}>
+                        {
+                            
+                            projects.map((item, index)=>{
+                                return(
+                                    <div className='project_item' key={index}>
+                                        <div className='project_img'>
+                                            <a href={item.acf.project_link ? item.acf.project_link : 'javascript:void(0)'} target={item.acf.project_link ? '_blank' : ''}>
+                                                <img src={item._embedded['wp:featuredmedia']['0'].source_url} alt="image" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                )
+                            })
+                        }
+                    </OwlCarousel>
+                }
                 <div className='projects_action'>
                     <Button 
                     title="View Work"

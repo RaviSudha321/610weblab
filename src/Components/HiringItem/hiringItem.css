@@ -6,6 +6,9 @@
     align-items: stretch;
     flex-wrap: wrap;
 }
+.hiring_item.hidden {
+    display: none;
+}
 .hiring_item:not(:last-child) {
     margin-bottom: 30px;
 }
