@@ -72,6 +72,11 @@
     font-size: 20px;
     line-height: 1.8;
     font-weight: 600;
+    color: #000;
+    transition: all 0.2s linear;
+}
+.recent_news_item .news_title:hover {
+    color: var(--light-blue)
 }
 .recent_news_item .news_date {
     display: inline-flex;

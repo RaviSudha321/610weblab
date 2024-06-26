@@ -18,8 +18,23 @@ import DigitalMarketing from "./Pages/DigitalMarketing/DigitalMarketing";
 import PhpDevelopment from "./Pages/PhpDevelopment/PhpDevelopment";
 import ShopifyDevelopment from "./Pages/ShopifyDevelopment/ShopifyDevelopment";
 import OpenSourceDevelopment from "./Pages/OpenSourceDevelopment/OpenSourceDevelopment";
+import Loader from "./Components/Loader/Loader";
+import { useEffect, useState } from "react";
 
 function App() {
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(()=>{
+    setTimeout(function(){
+      setLoading(false);
+    }, 2000)
+  }, [])
+
+  if(loading){
+    return <Loader />
+  }
+
   return (
     <div className="App">
       <ScrollToTop />
@@ -30,10 +45,10 @@ function App() {
             <Route path="/about-us" element={<About />} />
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:postSlug" element={<SingleBlog />} />
             <Route path="/contact-us" element={<Contact />} />
             <Route path="/web-design" element={<WebDesign />} />
             <Route path="/careers" element={<Careers />} />
-            <Route path="/single-blog" element={<SingleBlog />} />
             <Route path="/search" element={<Search />} />
             <Route path="/web-development" element={<WebDevelopment />} />
             <Route path="/digital-marketing" element={<DigitalMarketing />} />

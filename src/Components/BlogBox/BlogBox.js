@@ -12,7 +12,7 @@ function BlogBox({blog}){
                     </div>
                     <div className='blog_content'>
                         <h3 className='blog_title'>{blog.title.rendered}</h3>
-                        <div className='blog_desc' dangerouslySetInnerHTML={{__html:blog.excerpt.rendered}}></div>
+                        <div className='blog_desc' dangerouslySetInnerHTML={{__html:blog.excerpt.rendered.slice(0, 120)+'...'}}></div>
                         <div className='blog_actions'>
                             <span className='icon'>
                                 <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">

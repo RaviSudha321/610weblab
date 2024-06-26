@@ -59,7 +59,10 @@ function Testimonials(){
                                         return(
                                             <div className='testimonial_item' key={index}>
                                                 <div className='testimonial_img'>
-                                                    <img src={item._embedded['wp:featuredmedia']['0'].source_url} alt="image" />
+                                                    {item._embedded 
+                                                        ? <img src={item._embedded['wp:featuredmedia']['0'].source_url} alt={item.title.rendered} />
+                                                        : <img src="https://placehold.co/340x360?text=610+Web+Lab" alt={item.title.rendered} />
+                                                    }
                                                 </div>
                                                 <div className='testimonial_content'>
                                                     {

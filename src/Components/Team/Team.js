@@ -9,7 +9,7 @@ function Team(){
 
     const getTeam = async() => {
         try {
-            const response = await fetch(process.env.REACT_APP_REST_API_URL+'/weblab-team?_embed');
+            const response = await fetch(process.env.REACT_APP_REST_API_URL+'/weblab-team?_embed&order=asc');
             if(!response.ok){
                 console.log('team data not fetched');
                 return;
@@ -32,9 +32,6 @@ function Team(){
         getTeam();
     },[]);
 
-    console.log(team)
-    console.log(teamCat)
-
     return(
         <section className='team_sec'>
             <div className='container'>
@@ -56,7 +53,7 @@ function Team(){
                                                 <img src={member._embedded['wp:featuredmedia']['0'].source_url} alt={member.title.rendered} />
                                             </div>
                                             <h3 className='member_name'>{member.title.rendered}</h3>
-                                            <div className='member_designation'>{member._embedded['wp:term']['0']['0'].name}</div>
+                                            {member.acf.designation && <div className='member_designation'>{member.acf.designation}</div>}
                                         </div>
                                     )
                                 })

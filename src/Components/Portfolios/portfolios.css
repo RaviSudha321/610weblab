@@ -19,7 +19,8 @@
     cursor: pointer;
     font-weight: 500;
 }
-.portfolio_cats li:hover {
+.portfolio_cats li:hover,
+.portfolio_cats li.active {
     background-color: var(--light-blue);
     color: #fff;
 }

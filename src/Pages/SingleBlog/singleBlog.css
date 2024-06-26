@@ -35,6 +35,16 @@
     gap: 10px;
     line-height: 1.5;
 }
+.meta_item .meta_icon {
+    display: flex;
+}
+.blog_meta .meta_item img {
+    border-radius: 50%;
+    max-width: 34px;
+}
+.meta_item .meta_title {
+    text-transform: capitalize;
+}
 .blog_description {
     margin-top: 40px;
     border-top: 1px solid #CFCFCF;

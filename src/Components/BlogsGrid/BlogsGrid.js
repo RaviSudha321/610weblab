@@ -41,13 +41,10 @@ function BlogsGrid(){
 
     const handlePagination = (page) => {
         if(page) {
-            console.log('page', page)
             setCurrentPage(page);
             setOffset(perPage*(page-1));
         }
     }
-    console.log('offset', offset)
-    console.log('currentPage', currentPage)
 
     useEffect(()=>{
         const fetchData = async () => {
