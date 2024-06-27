@@ -20,6 +20,11 @@
     margin-top: 35px;
     padding-inline: 74px;
 }
+.blogs_carousel .owl-stage {
+    display: flex;
+    align-items: stretch;
+    padding-left: 2px;
+} 
 .blogs_carousel .owl-nav button {
     margin: 0 !important;
     position: absolute;

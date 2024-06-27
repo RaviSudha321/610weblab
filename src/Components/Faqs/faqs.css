@@ -40,8 +40,8 @@
 .faq_item .answer {
     display: none;
     margin-top: 9px;
-    font-size: 20px;
-    line-height: 1.5;
+    font-size: 18px;
+    line-height: 1.7;
     color: var(--text-color);
 }
 .faq_item.active .answer {

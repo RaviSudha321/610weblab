@@ -49,7 +49,7 @@ function App() {
             <Route path="/contact-us" element={<Contact />} />
             <Route path="/web-design" element={<WebDesign />} />
             <Route path="/careers" element={<Careers />} />
-            <Route path="/search" element={<Search />} />
+            <Route path="/search/:keyword" element={<Search />} />
             <Route path="/web-development" element={<WebDevelopment />} />
             <Route path="/digital-marketing" element={<DigitalMarketing />} />
             <Route path="/php-development" element={<PhpDevelopment />} />

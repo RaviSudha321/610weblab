@@ -56,7 +56,6 @@ function Projects(){
     useEffect(()=>{
         getProjects();
     }, []);
-    console.log(projects)
     
     return(
         <section className='projects_sec'>

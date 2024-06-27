@@ -78,7 +78,7 @@ function BlogsGrid(){
                             totalPages > 1 &&
                             <div className='pagination'>
                                 <ul className='pagination_items'>
-                                    {currentPage > 1 && <li><a href="#" onClick={(e)=>{e.preventDefault(); handlePagination(1);}}>Prev</a></li>}
+                                    {currentPage > 1 && <li><a href="#" onClick={(e)=>{e.preventDefault(); handlePagination(currentPage-1);}}>Prev</a></li>}
                                     {
                                         [...Array(totalPages)].map((x, i)=>{
                                             return(
@@ -92,7 +92,7 @@ function BlogsGrid(){
                                             )
                                         })
                                     }
-                                    {currentPage < totalPages && <li><a href="#" onClick={(e)=>{e.preventDefault(); handlePagination(totalPages);}}>Next</a></li>}
+                                    {currentPage < totalPages && <li><a href="#" onClick={(e)=>{e.preventDefault(); handlePagination(currentPage+1);}}>Next</a></li>}
                                 </ul>
                             </div>
                         }

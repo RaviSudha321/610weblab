@@ -68,5 +68,6 @@
     }
     .blogs_grid_content .blogs_grid {
         grid-template-columns: 100%;
+        grid-gap: 40px;
     }
 }

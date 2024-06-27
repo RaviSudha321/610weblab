@@ -50,6 +50,21 @@
     border-top: 1px solid #CFCFCF;
     padding-top: 30px;
 }
+.blog_description table {
+    width: 100%;
+    border: 1px solid;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+.blog_description table td {
+    padding: 15px;
+}
+.blog_description table td:not(:last-child) {
+    border-right: 1px solid #000;
+}
+.blog_description table tr:not(:last-child) td {
+    border-bottom: 1px solid #000;
+}
 .blog_description p {
     line-height: 1.8;
     color: var(--text-color);

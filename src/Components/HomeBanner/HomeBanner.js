@@ -1,8 +1,56 @@
+import { useState } from 'react';
 import Button from '../Button/Button';
 import './homeBanner.css';
 
 
 function HomeBanner(){
+
+    const [formData, setFormData] = useState({});
+
+    const handelChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const handleSubmit = async(e) => {
+        e.preventDefault();
+
+        // if(formData){
+
+        //     const data = new URLSearchParams();
+
+        //     data.append('fullname', formData.fullname);
+        //     data.append('email_address', formData.email_address);
+        //     data.append('phone_number', formData.phone_number);
+        //     data.append('service', formData.service);
+        //     data.append('comment', formData.comment);
+
+        //     try {
+        //         const response = await fetch(process.env.REACT_APP_REST_API_FORM_URL+'/9/feedback',{
+        //             method: 'POST',
+        //             headers: {
+        //                 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+        //             },
+        //             body: data.toString(),
+        //         });
+                
+        //         if (!response.ok) {
+        //             throw new Error('Contact form network response was not ok', response);
+        //         }
+    
+        //         const result = await response.json();
+        //         console.log('Success:', result);
+        //     }
+        //     catch (error) {
+        //         console.error('There was an error submitting the form:', error);
+        //     }
+        // }
+
+        setFormData({});
+    }
+
     return(
         <div className='home_banner_sec'>
             <div className='container'>
@@ -54,22 +102,22 @@ function HomeBanner(){
                         <div className='banner_form'>
                             <h2 className='form_title'>Free Website Audit</h2>
                             <p className='form_desc'>Please provide the following information about you and get connected with us.</p>
-                            <form id="website_audit_form" className='website_audit_form'>
+                            <form id="website_audit_form" className='website_audit_form' onSubmit={handleSubmit}>
                                 <p className='form_field name_field'>
                                     <label htmlFor='fullname'>Full Name</label>
-                                    <input type="text" name="fullname" id="fullname" placeholder='Enter Your Name' required />
+                                    <input type="text" name="fullname" id="fullname" placeholder='Enter Your Name' required value={formData.fullname || ''} onChange={handelChange} />
                                 </p>
                                 <p className='form_field email_field'>
                                     <label htmlFor='email_address'>Email Address</label>
-                                    <input type="email" name="email_address" id="email_address" placeholder='Enter Your Email' required />
+                                    <input type="email" name="email_address" id="email_address" placeholder='Enter Your Email' required value={formData.email_address || ''} onChange={handelChange} />
                                 </p>
                                 <p className='form_field phone_field'>
                                     <label htmlFor='phone_number'>Phone Number</label>
-                                    <input type="tel" name="phone_number" id="phone_number" placeholder='Enter Your Phone Number' required />
+                                    <input type="tel" name="phone_number" id="phone_number" placeholder='Enter Your Phone Number' required value={formData.phone_number || ''} onChange={handelChange} />
                                 </p>
                                 <p className='form_field select_field'>
                                     <label htmlFor='service'>Services are you looking for</label>
-                                    <select name="service" id="service" required>
+                                    <select name="service" id="service" required value={formData.service || ''} onChange={handelChange}>
                                         <option value="">Select Service</option>
                                         <option value="Web Design">Web Design</option>
                                         <option value="Web Development">Web Development</option>
@@ -77,7 +125,7 @@ function HomeBanner(){
                                 </p>
                                 <p className='form_field comment_field'>
                                     <label htmlFor='comment'>Comment</label>
-                                    <textarea name="comment" id="comment" placeholder='Hi there, I would like to ....' rows="4" required></textarea>
+                                    <textarea name="comment" id="comment" placeholder='Hi there, I would like to ....' rows="4" required value={formData.comment || ''} onChange={handelChange}></textarea>
                                 </p>
                                 <p className='form_field submit_btn'>
                                     <input type="submit" name="website_audit_submit" id="website_audit_submit" />

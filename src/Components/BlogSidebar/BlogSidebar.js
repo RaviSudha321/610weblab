@@ -1,11 +1,13 @@
 import './blogSidebar.css';
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 function BlogSidebar({currentPost}){
     
     const [categories, setCategories] = useState([]);
     const [recentPosts, setRecentPosts] = useState([]);
+    const [searchKeyword, setSearchKeyword] = useState('');
+    const navigate = useNavigate();
 
     const getCategories = async() => {
         try {
@@ -42,17 +44,25 @@ function BlogSidebar({currentPost}){
         return new Date(dateString).toLocaleDateString('en-US', options);
     }
 
+    const onChangeSearch = (value) => {
+        setSearchKeyword(value);
+    }
+    
+    const handleSearchSubmit = () => {
+        navigate('/search/'+searchKeyword);
+    }
+
     useEffect(()=>{
         getCategories();
         getRecentPosts();
     }, [currentPost])
-console.log(recentPosts)
+
     return(
         <div className='blog_sidebar'>
             <div className='sidebar_widget sidebar_search'>
                 <h3 className='sidebar_widget_title'>Search</h3>
-                <form id="search_form" className='search_form'>
-                    <input type="search" name="search" id="search" placeholder='Find Keywords' />
+                <form id="search_form" className='search_form' onSubmit={handleSearchSubmit}>
+                    <input type="search" name="search" id="search" placeholder='Find Keywords' required onChange={(e)=>onChangeSearch(e.target.value)} />
                     <input type="submit" name="submit_search" id="submit_search" />
                 </form>
             </div>
@@ -64,17 +74,17 @@ console.log(recentPosts)
                         {
                             categories.map((category, index)=>{
                                 return (
-                                    <>
+                                    <React.Fragment key={index}>
                                         {
                                             category.count > 0 &&
-                                                <li className='category_list_item' key={index}>
+                                                <li className='category_list_item'>
                                                 <a href="#">
                                                     <span className='category_name'>{category.name}</span>
                                                     <span className='category_posts_count'>({category.count})</span>
                                                 </a>
                                             </li>
                                         }
-                                    </>
+                                    </React.Fragment>
                                 )
                             })
                         }
