@@ -67,7 +67,6 @@ function Portfolios(){
                                 <li className={currentCat == 'all' && 'active'} onClick={()=>handleClick('all')}>All</li>
                                 {
                                     projectCats.map((category, index) => {
-                                        console.log(category)
                                         return(
                                             <>
                                             {
