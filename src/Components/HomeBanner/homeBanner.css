@@ -59,6 +59,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    justify-content: space-between;
 }
 .website_audit_form .form_field {
     position: relative;
@@ -125,7 +126,6 @@
 .website_audit_form .rating_img img {
     max-width: 250px;
 }
-
 
 @media (min-width:1281px) and (max-width:1500px){
     .home_banner_content .banner_right_col {
@@ -195,6 +195,12 @@
     }
     body .home_banner_sec {
         padding-inline: 20px;
+    }
+}
+
+@media (min-width:641px){
+    .website_audit_form .submit_btn {
+        max-width: fit-content;
     }
 }
 

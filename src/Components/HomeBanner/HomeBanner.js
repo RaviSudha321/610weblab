@@ -1,54 +1,70 @@
 import { useState } from 'react';
 import Button from '../Button/Button';
 import './homeBanner.css';
-
+import emailjs from '@emailjs/browser';
 
 function HomeBanner(){
 
     const [formData, setFormData] = useState({});
+    const [isLoading, setIsLoading] = useState(false);
 
-    const handelChange = (e) => {
+    const handleChange = (e) => {
         setFormData({
             ...formData,
             [e.target.name]: e.target.value
-        })
+        });
     }
+
+    // const emailBody = `
+    //     <b>Name:</b> ${formData.fullname}
+    //     <br/>
+    //     <b>Email:</b> ${formData.email_address}
+    //     <br/>
+    //     <b>Phone:</b> ${formData.phone_number}
+    //     <br/>
+    //     <b>Service:</b> ${formData.service}
+    //     <br/>
+    //     <b>Comment:</b> ${formData.comment}
+    // `;
 
     const handleSubmit = async(e) => {
         e.preventDefault();
-
-        // if(formData){
-
-        //     const data = new URLSearchParams();
-
-        //     data.append('fullname', formData.fullname);
-        //     data.append('email_address', formData.email_address);
-        //     data.append('phone_number', formData.phone_number);
-        //     data.append('service', formData.service);
-        //     data.append('comment', formData.comment);
-
-        //     try {
-        //         const response = await fetch(process.env.REACT_APP_REST_API_FORM_URL+'/9/feedback',{
-        //             method: 'POST',
-        //             headers: {
-        //                 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
-        //             },
-        //             body: data.toString(),
-        //         });
-                
-        //         if (!response.ok) {
-        //             throw new Error('Contact form network response was not ok', response);
-        //         }
-    
-        //         const result = await response.json();
-        //         console.log('Success:', result);
+        setIsLoading(true);
+        // window.Email.send({
+        //     SecureToken : "088229d7-e86c-4936-83c1-24d38a56c8af",
+        //     To : 'ravisudha.610weblab@gmail.com',
+        //     From : formData.email_address,
+        //     Subject : "New Website Audit Enquiry",
+        //     Body : emailBody
+        // }).then(
+        //   message => {
+        //     setFormMessage(message)
+        //     if(message=='OK'){
+        //         console.log('Thanks for submitting details.We will contact you soon.');
+        //         setFormData([]);
         //     }
-        //     catch (error) {
-        //         console.error('There was an error submitting the form:', error);
-        //     }
-        // }
+        //     else{
+        //         console.error(message);
+        //     }  
+        //   }
+        // );
 
-        setFormData({});
+        emailjs.sendForm(process.env.REACT_APP_EMAILJS_SERVICE_ID, process.env.REACT_APP_EMAILJS_TEMPLATE_ID, e.target, {
+            publicKey: process.env.REACT_APP_EMAILJS_PUBLIC_KEY,
+        })
+        .then(
+            (success) => {
+                if(success.status == 200 & success.text == "OK"){
+                    alert('form submitted');
+                    setFormData([]);
+                    setIsLoading(false);
+                }
+            },
+            (error) => {
+                console.log('FAILED...', error.text);
+                setIsLoading(false);
+            },
+        );
     }
 
     return(
@@ -105,19 +121,19 @@ function HomeBanner(){
                             <form id="website_audit_form" className='website_audit_form' onSubmit={handleSubmit}>
                                 <p className='form_field name_field'>
                                     <label htmlFor='fullname'>Full Name</label>
-                                    <input type="text" name="fullname" id="fullname" placeholder='Enter Your Name' required value={formData.fullname || ''} onChange={handelChange} />
+                                    <input type="text" name="fullname" id="fullname" placeholder='Enter Your Name' required value={formData.fullname || ''} onChange={handleChange} />
                                 </p>
                                 <p className='form_field email_field'>
                                     <label htmlFor='email_address'>Email Address</label>
-                                    <input type="email" name="email_address" id="email_address" placeholder='Enter Your Email' required value={formData.email_address || ''} onChange={handelChange} />
+                                    <input type="email" name="email_address" id="email_address" placeholder='Enter Your Email' required value={formData.email_address || ''} onChange={handleChange} />
                                 </p>
                                 <p className='form_field phone_field'>
                                     <label htmlFor='phone_number'>Phone Number</label>
-                                    <input type="tel" name="phone_number" id="phone_number" placeholder='Enter Your Phone Number' required value={formData.phone_number || ''} onChange={handelChange} />
+                                    <input type="tel" name="phone_number" id="phone_number" placeholder='Enter Your Phone Number' required value={formData.phone_number || ''} onChange={handleChange} />
                                 </p>
                                 <p className='form_field select_field'>
                                     <label htmlFor='service'>Services are you looking for</label>
-                                    <select name="service" id="service" required value={formData.service || ''} onChange={handelChange}>
+                                    <select name="service" id="service" required value={formData.service || ''} onChange={handleChange}>
                                         <option value="">Select Service</option>
                                         <option value="Web Design">Web Design</option>
                                         <option value="Web Development">Web Development</option>
@@ -125,15 +141,21 @@ function HomeBanner(){
                                 </p>
                                 <p className='form_field comment_field'>
                                     <label htmlFor='comment'>Comment</label>
-                                    <textarea name="comment" id="comment" placeholder='Hi there, I would like to ....' rows="4" required value={formData.comment || ''} onChange={handelChange}></textarea>
+                                    <textarea name="comment" id="comment" placeholder='Hi there, I would like to ....' rows="4" required value={formData.comment || ''} onChange={handleChange}></textarea>
                                 </p>
                                 <p className='form_field submit_btn'>
                                     <input type="submit" name="website_audit_submit" id="website_audit_submit" />
+                                    {isLoading && <div className="loading"><div className="lds-dual-ring"></div></div>}
                                 </p>
                                 <p className='form_field rating_img'>
                                     <img src="images/rating.webp" alt="image" />
                                 </p>
                             </form>
+                            {   
+                                <>
+                                {/* {isLoading ? <div className="loading"><div className="lds-dual-ring"></div></div> : '<div class="success_msg">Form Submission Successfully</div>'} */}
+                               </>
+                            }
                         </div>
                     </div>
                 </div>

@@ -5,9 +5,43 @@ import ContactBox from "../../Components/ContactBox/ContactBox";
 import { FaXTwitter, FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa6";
 import SuccessCounter from "../../Components/SuccessCounter/SuccessCounter";
 import { Helmet } from "react-helmet";
+import { useState } from "react";
+import emailjs from '@emailjs/browser';
 
 
 function Contact(){
+
+    const [formData, setFormData] = useState({});
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    }
+
+    const handleSubmit = async(e) => {
+        e.preventDefault();
+        setIsLoading(true);
+
+        emailjs.sendForm(process.env.REACT_APP_EMAILJS_SERVICE_ID, process.env.REACT_APP_EMAILJS_TEMPLATE_ID, e.target, {
+            publicKey: process.env.REACT_APP_EMAILJS_PUBLIC_KEY,
+        })
+        .then(
+            (success) => {
+                if(success.status == 200 & success.text == "OK"){
+                    alert('form submitted');
+                    setFormData([]);
+                    setIsLoading(false);
+                }
+            },
+            (error) => {
+                console.log('FAILED...', error);
+                setIsLoading(false);
+            },
+        );
+    }
 
     const socialMedia = [
         {
@@ -94,33 +128,34 @@ function Contact(){
                 <div className="container">
                     <div className="lets_discuss_content">
                         <div className="discuss_form">
-                            <form id="discuss_form">
+                            <form id="discuss_form" onSubmit={handleSubmit}>
                                 <p className="form_field">
                                     <label htmlFor="fullname">Full Name</label>
-                                    <input type="text" name="fullname" id="fullname" placeholder="Full Name" required />
+                                    <input type="text" name="fullname" id="fullname" placeholder="Full Name" required value={formData.fullname || ''} onChange={handleChange} />
                                 </p>
                                 <p className="form_field">
                                     <label htmlFor="email_address">Email Address</label>
-                                    <input type="email" name="email_address" id="email_address" placeholder="support@gmail.com" required />
+                                    <input type="email" name="email_address" id="email_address" placeholder="support@gmail.com" required value={formData.email_address || ''} onChange={handleChange} />
                                 </p>
                                 <p className="form_field">
                                     <label htmlFor="phone_number">Phone Number</label>
-                                    <input type="tel" name="phone_number" id="phone_number" placeholder="+000 (123) 456 88" required />
+                                    <input type="tel" name="phone_number" id="phone_number" placeholder="+000 (123) 456 88" required value={formData.phone_number || ''} onChange={handleChange} />
                                 </p>
                                 <p className="form_field select_field">
-                                    <label htmlFor="requirment">Select Requirments</label>
-                                    <select name="requirment" id="requirment" required>
+                                    <label htmlFor="service">Select Requirments</label>
+                                    <select name="service" id="service" required value={formData.service || ''} onChange={handleChange} >
                                         <option value="">Website customize</option>
-                                        <option value="">Website Design</option>
-                                        <option value="">Website Development</option>
+                                        <option value="website-design">Website Design</option>
+                                        <option value="website-development">Website Development</option>
                                     </select>
                                 </p>
                                 <p className="form_field fullwidth">
-                                    <label htmlFor="message">Write Message</label>
-                                    <textarea name="message" id="message" placeholder="Write Message" rows="4"></textarea>
+                                    <label htmlFor="comment">Write Message</label>
+                                    <textarea name="comment" id="comment" placeholder="Write Message" rows="4" required value={formData.comment || ''} onChange={handleChange} ></textarea>
                                 </p>
                                 <p className="form_field fullwidth">
-                                <input type="submit" name="discuss_submit" id="discuss_submit" value="Send Message" />
+                                    <input type="submit" name="discuss_submit" id="discuss_submit" value="Send Message" />
+                                    {isLoading && <div className="loading"><div className="lds-dual-ring"></div></div>}
                                 </p>
                             </form>
                         </div>

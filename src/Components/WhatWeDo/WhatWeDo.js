@@ -1,8 +1,13 @@
 import Button from '../Button/Button';
+import VideoPopup from '../VideoPopup/VideoPopup';
 import './whatWeDo.css';
+import { useState } from 'react';
 
 
 function WhatWeDo(){
+
+    const [activePopup, setActivePopup] = useState(false);
+
     return(
         <section className='what_we_do_sec'>
             <div className='container'>
@@ -48,7 +53,7 @@ function WhatWeDo(){
                             link="#"
                             />
                             <div className='what_video_btn'>
-                                <a href="#">
+                                <a href="#" onClick={(e)=>{e.preventDefault(); setActivePopup(true);}}>
                                     <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="17" cy="17" r="17" fill="#30A9E0"/>
                                         <path d="M13.0981 11.634C13.0981 10.8642 13.9314 10.383 14.5981 10.7679L23.8923 16.134C24.559 16.5189 24.559 17.4811 23.8923 17.866L14.5981 23.2321C13.9314 23.617 13.0981 23.1358 13.0981 22.366L13.0981 11.634Z" fill="white"/>
@@ -64,6 +69,7 @@ function WhatWeDo(){
                     </div>
                 </div>
             </div>
+            <VideoPopup videoUrl="https://www.youtube.com/embed/D0UnqGm_miA?si=ojHbqqgaNoY7KGHh" activePopup={activePopup} setActivePopup={setActivePopup} />
         </section>
     )
 }
