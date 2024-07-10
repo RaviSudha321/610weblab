@@ -20,6 +20,14 @@
 .global_btn a:hover path {
     fill: #fff;
 }
+.global_btn.whatsapp svg {
+    height: 21px;
+    width: 21px;
+}
+.global_btn.whatsapp svg {
+    color: #25D366;
+}
+
 
 @media (min-width:768px) and (max-width:1024px){
     body .global_btn a {

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import HiringItem from '../HiringItem/HiringItem';
 import './hirings.css';
+import Loading from '../Loading/Loading';
 
 
 function Hirings(){
@@ -8,19 +9,26 @@ function Hirings(){
     const [hirings, setHirings] = useState([]);
     const [hiringsCats, setHiringsCats] = useState([]);
     const [activeCategory, setActiveCategory] = useState('all');
+    const [isLoading, setIsLoading] = useState(true);
+    const [isError, setIsError] = useState(false);
 
     const getHirings = async()=>{
         try {
             const response = await fetch(process.env.REACT_APP_REST_API_URL+'/weblab-hiring?_embed');
             if(!response.ok){
                 console.log('Fetch hiring error');
+                setIsError(true);
+                setIsLoading(false);
                 return;
             }
             const data = await response.json();
             setHirings(data);
+            setIsLoading(false);
         }
         catch (error){
             console.log('hiring catch error', error);
+            setIsError(true);
+            setIsLoading(false);
         }
     }
 
@@ -51,7 +59,7 @@ function Hirings(){
     },[])
 
     useEffect(()=>{
-        console.log('test')
+
     },[activeCategory])
 
     return(
@@ -60,7 +68,9 @@ function Hirings(){
                 <h2 className='sec_title'>We are hiring value-based skills</h2>
                 <div className='description'>610weblab is inviting talented and serious professionals from Developers to experts in Design, SEO, Testing, and more to be a part of the top-performing Software Development Company. Email us your updated Résumé/CV at support@610weblab.com. We are currently hiring for the below positions:</div>
                 {
-                    hirings.length > 0 ?
+                    isLoading ?
+                    <Loading /> :
+                    hirings.length > 0 && !isError ?
                     <div className='hirings_content'>
                         {
                             hiringsCats.length > 0 &&
@@ -93,7 +103,7 @@ function Hirings(){
                             }
                         </div>
                     </div>
-                    : <p style={{textAlign:'center', marginTop:'50px', fontSize:'24px',color:'#f00'}}>Hiring is close now.</p>
+                    : <p style={{textAlign:'center', marginTop:'50px', fontSize:'24px',color:'#f00'}}>Hiring is closed now.</p>
                 }
                 
             </div>

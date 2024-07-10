@@ -1,6 +1,6 @@
 import './blogSidebar.css';
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 
 function BlogSidebar({currentPost}){
     
@@ -78,10 +78,10 @@ function BlogSidebar({currentPost}){
                                         {
                                             category.count > 0 &&
                                                 <li className='category_list_item'>
-                                                <a href="#">
+                                                <NavLink to="#">
                                                     <span className='category_name'>{category.name}</span>
                                                     <span className='category_posts_count'>({category.count})</span>
-                                                </a>
+                                                </NavLink>
                                             </li>
                                         }
                                     </React.Fragment>

@@ -46,6 +46,7 @@
     justify-content: space-between;
     color: var(--text-color);
     line-height: 1.5;
+    cursor: auto;
 }
 .category_list_item a:hover {
     color: var(--light-blue);

@@ -37,7 +37,7 @@ function Search(){
                 <title>Search Result Page</title>
             </Helmet>
             <PageBanner
-            title="Search Result"
+            title={`Search Result For: ${keyword}`}
             />
             {
                 searchResults.length > 0 &&

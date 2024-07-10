@@ -2,7 +2,7 @@ import CallToAction from "../../Components/CallToAction/CallToAction";
 import PageBanner from "../../Components/PageBanner/PageBanner";
 import Testimonials from "../../Components/Testimonials/Testimonials";
 import ContactBox from "../../Components/ContactBox/ContactBox";
-import { FaXTwitter, FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa6";
+import { FaXTwitter, FaFacebookF, FaInstagram, FaLinkedinIn, FaBehance } from "react-icons/fa6";
 import SuccessCounter from "../../Components/SuccessCounter/SuccessCounter";
 import { Helmet } from "react-helmet";
 import { useState } from "react";
@@ -59,6 +59,10 @@ function Contact(){
         {
             icon:<FaLinkedinIn />,    
             link:'https://www.linkedin.com/company/610-web-lab'
+        },
+        {
+            icon:<FaBehance />,
+            link:'https://www.behance.net/6Xweblab'
         },
     ];
 

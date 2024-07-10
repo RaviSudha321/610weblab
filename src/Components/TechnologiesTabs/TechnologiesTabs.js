@@ -31,41 +31,38 @@ function TechnologiesTabs(){
                 </div>
                 <div className='technologies_tabs'>
                     <div className='technology_tabs_titles'>
-                        <div className='tt_title' onClick={()=>handleClick(0)}>Web Development</div>
-                        <div className='tt_title' onClick={()=>handleClick(1)}>Digital Marketing</div>
-                        <div className='tt_title' onClick={()=>handleClick(2)}>Graphic Design</div>
-                        <div className='tt_title' onClick={()=>handleClick(3)}>Mobile App</div>
+                        <div className={`tt_title ${activeTab == 0 ? 'active' : ''}`} onClick={()=>handleClick(0)}>Web Development</div>
+                        <div className={`tt_title ${activeTab == 1 ? 'active' : ''}`} onClick={()=>handleClick(1)}>Digital Marketing</div>
+                        <div className={`tt_title ${activeTab == 2 ? 'active' : ''}`} onClick={()=>handleClick(2)}>Graphic Design</div>
+                        <div className={`tt_title ${activeTab == 3 ? 'active' : ''}`} onClick={()=>handleClick(3)}>Mobile App</div>
                     </div>
                     <div className='technology_tabs_contents'> 
                         <div className={`tt_content ${activeTab == 0 ? 'active' : ''}`}>
                             <p className='description'>In web development, front-end technologies attract users with visually appealing interfaces, while back-end technologies ensure smooth data interaction. Without captivating visuals, user engagement diminishes. Back-end tools, frameworks, and databases manage server-side operations, facilitating communication with the front end.</p>
                             <div className='technology_logos'>
-                            <div className='technology_img'>
-                                    <img src="images/shopify.webp" alt="logo" />
+                                <div className='technology_img'>
+                                    <img src="images/web-development/html5.png" alt="logo" />
                                 </div>
                                 <div className='technology_img'>
-                                    <img src="images/shopify.webp" alt="logo" />
+                                    <img src="images/web-development/javascript.png" alt="logo" />
                                 </div>
                                 <div className='technology_img'>
-                                    <img src="images/shopify.webp" alt="logo" />
+                                    <img src="images/web-development/laravel.png" alt="logo" />
                                 </div>
                                 <div className='technology_img'>
-                                    <img src="images/shopify.webp" alt="logo" />
+                                    <img src="images/web-development/nodejs.png" alt="logo" />
                                 </div>
                                 <div className='technology_img'>
-                                    <img src="images/shopify.webp" alt="logo" />
+                                    <img src="images/web-development/php.png" alt="logo" />
                                 </div>
                                 <div className='technology_img'>
-                                    <img src="images/shopify.webp" alt="logo" />
+                                    <img src="images/web-development/react.png" alt="logo" />
                                 </div>
                                 <div className='technology_img'>
-                                    <img src="images/shopify.webp" alt="logo" />
+                                    <img src="images/web-development/Shopify.png" alt="logo" />
                                 </div>
                                 <div className='technology_img'>
-                                    <img src="images/shopify.webp" alt="logo" />
-                                </div>
-                                <div className='technology_img'>
-                                    <img src="images/shopify.webp" alt="logo" />
+                                    <img src="images/web-development/wordpress.png" alt="logo" />
                                 </div>
                             </div>
                         </div>
@@ -73,31 +70,16 @@ function TechnologiesTabs(){
                             <p className='description'>In web development, front-end technologies attract users with visually appealing interfaces, while back-end technologies ensure smooth data interaction. Without captivating visuals, user engagement diminishes. Back-end tools, frameworks, and databases manage server-side operations, facilitating communication with the front end.</p>
                             <div className='technology_logos'>
                                 <div className='technology_img'>
-                                    <img src="images/html.webp" alt="logo" />
+                                    <img src="images/digital-marketing/Ad.png" alt="logo" />
                                 </div>
                                 <div className='technology_img'>
-                                    <img src="images/html.webp" alt="logo" />
+                                    <img src="images/digital-marketing/email.png" alt="logo" />
                                 </div>
                                 <div className='technology_img'>
-                                    <img src="images/html.webp" alt="logo" />
+                                    <img src="images/digital-marketing/meta.png" alt="logo" />
                                 </div>
                                 <div className='technology_img'>
-                                    <img src="images/html.webp" alt="logo" />
-                                </div>
-                                <div className='technology_img'>
-                                    <img src="images/html.webp" alt="logo" />
-                                </div>
-                                <div className='technology_img'>
-                                    <img src="images/html.webp" alt="logo" />
-                                </div>
-                                <div className='technology_img'>
-                                    <img src="images/html.webp" alt="logo" />
-                                </div>
-                                <div className='technology_img'>
-                                    <img src="images/html.webp" alt="logo" />
-                                </div>
-                                <div className='technology_img'>
-                                    <img src="images/html.webp" alt="logo" />
+                                    <img src="images/digital-marketing/Seo.png" alt="logo" />
                                 </div>
                             </div>
                         </div>
@@ -105,31 +87,13 @@ function TechnologiesTabs(){
                             <p className='description'>In web development, front-end technologies attract users with visually appealing interfaces, while back-end technologies ensure smooth data interaction. Without captivating visuals, user engagement diminishes. Back-end tools, frameworks, and databases manage server-side operations, facilitating communication with the front end.</p>
                             <div className='technology_logos'>
                             <div className='technology_img'>
-                                    <img src="images/php.webp" alt="logo" />
+                                    <img src="images/graphic-design/Ai.png" alt="logo" />
                                 </div>
                                 <div className='technology_img'>
-                                    <img src="images/php.webp" alt="logo" />
+                                    <img src="images/graphic-design/Figma.png" alt="logo" />
                                 </div>
                                 <div className='technology_img'>
-                                    <img src="images/php.webp" alt="logo" />
-                                </div>
-                                <div className='technology_img'>
-                                    <img src="images/php.webp" alt="logo" />
-                                </div>
-                                <div className='technology_img'>
-                                    <img src="images/php.webp" alt="logo" />
-                                </div>
-                                <div className='technology_img'>
-                                    <img src="images/php.webp" alt="logo" />
-                                </div>
-                                <div className='technology_img'>
-                                    <img src="images/php.webp" alt="logo" />
-                                </div>
-                                <div className='technology_img'>
-                                    <img src="images/php.webp" alt="logo" />
-                                </div>
-                                <div className='technology_img'>
-                                    <img src="images/php.webp" alt="logo" />
+                                    <img src="images/graphic-design/PS.png" alt="logo" />
                                 </div>
                             </div>
                         </div>
@@ -137,31 +101,10 @@ function TechnologiesTabs(){
                             <p className='description'>In web development, front-end technologies attract users with visually appealing interfaces, while back-end technologies ensure smooth data interaction. Without captivating visuals, user engagement diminishes. Back-end tools, frameworks, and databases manage server-side operations, facilitating communication with the front end.</p>
                             <div className='technology_logos'>
                             <div className='technology_img'>
-                                    <img src="images/react.webp" alt="logo" />
+                                    <img src="images/mobile-app/81.png" alt="logo" />
                                 </div>
                                 <div className='technology_img'>
-                                    <img src="images/react.webp" alt="logo" />
-                                </div>
-                                <div className='technology_img'>
-                                    <img src="images/react.webp" alt="logo" />
-                                </div>
-                                <div className='technology_img'>
-                                    <img src="images/react.webp" alt="logo" />
-                                </div>
-                                <div className='technology_img'>
-                                    <img src="images/react.webp" alt="logo" />
-                                </div>
-                                <div className='technology_img'>
-                                    <img src="images/react.webp" alt="logo" />
-                                </div>
-                                <div className='technology_img'>
-                                    <img src="images/react.webp" alt="logo" />
-                                </div>
-                                <div className='technology_img'>
-                                    <img src="images/react.webp" alt="logo" />
-                                </div>
-                                <div className='technology_img'>
-                                    <img src="images/react.webp" alt="logo" />
+                                    <img src="images/mobile-app/iSo.png" alt="logo" />
                                 </div>
                             </div>
                         </div>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import PortfolioBox from '../PortfolioBox/PortfolioBox';
 import './portfolios.css';
-
+import Loading from '../Loading/Loading'
 
 function Portfolios(){
 
@@ -9,18 +9,23 @@ function Portfolios(){
     const [projectCats, setProjectCats] = useState([]);
     const [filteredProjects, setFilteredProjects] = useState([]);
     const [currentCat, setCurrentCat] = useState('all');
+    const [isLoading, setIsLoading] = useState(true);
 
     const getPortfolios = async()=>{
         try {
             const response = await fetch(process.env.REACT_APP_REST_API_URL+'/weblab-projects?order=asc&_embed');
             if(!response.ok){
                 throw new Error('Network response was not ok: portfolios');
+                setIsLoading(false);
+                return;
             }
             const data = await response.json();
             setPortfolios(data);
+            setIsLoading(false);
         }
         catch (error){
-            console.log('portfolios error:', error)
+            console.log('portfolios error:', error);
+            setIsLoading(false);
         }
     }
 
@@ -29,19 +34,22 @@ function Portfolios(){
             const response = await fetch(process.env.REACT_APP_REST_API_URL+'/project-categories');
             if(!response.ok){
                 throw new Error('Network response was not ok: portfolios');
+                setIsLoading(false);
+                return;
             }
             const data = await response.json();
             setProjectCats(data);
+            setIsLoading(false);
         }
         catch (error) {
-            console.log('portfolios categories:', error)
+            console.log('portfolios categories:', error);
+            setIsLoading(false);
         }
     }
 
     const handleClick = (category) => {
         if(currentCat != category){
             setCurrentCat(category);
-            console.log(category)
             const filteredProjects = portfolios.filter((item)=>{
                 return item['project-categories'].includes(category);
             });
@@ -61,6 +69,8 @@ function Portfolios(){
                     <h3 className='sec_sub_title'>Pre-made Template</h3>
                     <h2 className='sec_title'>Let’s See Our Popular Website Template</h2>
                     {
+                        isLoading ?
+                        <Loading /> :
                         projectCats.length > 0 &&
                         <div className='portfolios_filter'>
                             <ul className='portfolio_cats'>

@@ -126,6 +126,17 @@
 .website_audit_form .rating_img img {
     max-width: 250px;
 }
+.form_field span.error {
+    color: #f00;
+    font-size: 13px;
+}
+.form_field.has_error input,
+.form_field.has_error select, 
+.form_field.has_error textarea {
+    border-color: #f00;
+}
+
+
 
 @media (min-width:1281px) and (max-width:1500px){
     .home_banner_content .banner_right_col {

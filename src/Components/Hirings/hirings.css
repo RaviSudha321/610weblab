@@ -10,15 +10,15 @@
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    column-gap: 30px;
+    column-gap: 20px;
     row-gap: 10px;
 }
 .hiring_cats li {
-    font-size: 20px;
+    font-size: 17px;
     line-height: 1.5;
     font-weight: 500;
     color: var(--text-color);
-    padding: 5px 24px;
+    padding: 5px 15px;
     transition: all 0.2s linear;
     border-radius: 5px;
     cursor: pointer;
@@ -35,20 +35,20 @@
     text-align: right;
 }
 
-@media (min-width:1281px) and (max-width:1500px){
+/* @media (min-width:1281px) and (max-width:1500px){
     .hirings_filter .hiring_cats li {
         font-size: 20px;
         padding: 5px 15px;
     }
-}
+} */
 
 @media (min-width:1025px) and (max-width:1280px){
-    .hirings_filter .hiring_cats li {
+    /* .hirings_filter .hiring_cats li {
         font-size: 18px;
         padding: 5px 15px;
-    }
+    } */
     .hirings_filter .hiring_cats {
-        column-gap: 20px;
+        column-gap: 15px;
     }
     .hiring_item .hiring_description {
         padding-right: 0;

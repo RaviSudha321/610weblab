@@ -50,6 +50,12 @@
     border-top: 1px solid #CFCFCF;
     padding-top: 30px;
 }
+.blog_description a {
+    color: var(--light-blue);
+}
+.blog_description a:hover {
+    color: var(--dark-blue);
+}
 .blog_description table {
     width: 100%;
     border: 1px solid;

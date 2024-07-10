@@ -48,7 +48,8 @@
     text-align: center;
     cursor: pointer;
 }
-.tt_title:hover {
+.tt_title:hover,
+.tt_title.active {
     color: #fff;
     background-color: var(--light-blue);
 }

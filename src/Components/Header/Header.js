@@ -4,6 +4,7 @@ import Button from "../Button/Button";
 import { useEffect, useState } from 'react';
 import { FaBarsStaggered } from "react-icons/fa6";
 import { RiCloseLargeFill } from "react-icons/ri";
+import { FaChevronDown } from "react-icons/fa6";
 
 function Header(){
 
@@ -11,7 +12,13 @@ function Header(){
     const [headerClass, setHeaderClass] = useState('');
     const [activeMenu, setActiveMenu] = useState(false);
     const [activeSubMenus, setActiveSubMenus] = useState([]);
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     
+    useEffect(()=>{
+        const handleResize = () => setWindowWidth(window.innerWidth);
+        window.addEventListener("resize", handleResize);
+    }, [windowWidth])
+
     useEffect(()=>{
         window.addEventListener('scroll', function(){
             if(window.scrollY > 20){
@@ -27,7 +34,7 @@ function Header(){
         setActiveSubMenus([]);
     }, [pathname])
 
-    const handleMobileSubMenu = (index) => {
+    const handleSubMenu = (index) => {
         if (activeSubMenus.includes(index)) {
             // Remove the item and update the state
             setActiveSubMenus(activeSubMenus.filter(item => item !== index));
@@ -57,51 +64,59 @@ function Header(){
                                         <li>
                                             <NavLink to="/web-design">Web Design</NavLink>
                                         </li>
-                                        <li className={`has_sub_menu ${activeSubMenus.includes(3) ? 'active_sub_menu' : ''}`}>
-                                            <NavLink to="javascript:void(0)" onClick={(e)=>{e.preventDefault(); handleMobileSubMenu(3)}}>
-                                                Web Development
-                                                <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <g clip-path="url(#clip0_1347_921)">
-                                                    <path d="M0.827169 2.25809C0.687521 2.29031 0.625216 2.33328 0.356662 2.59754C0.053732 2.89617 2.1064e-05 2.98641 2.1064e-05 3.21199C2.1064e-05 3.50848 -0.169705 3.31941 2.6383 6.12742C5.41194 8.9032 5.24651 8.75281 5.51076 8.75066C5.77072 8.74851 5.63752 8.87098 8.37893 6.11883C9.75608 4.73523 10.9055 3.56434 10.9356 3.51492C10.9828 3.43758 10.9893 3.4032 10.9893 3.22273C10.9893 3.04012 10.9828 3.00789 10.9313 2.92195C10.9012 2.86824 10.7594 2.71355 10.6197 2.57605C10.3211 2.28172 10.2524 2.24734 10.0074 2.26023C9.91721 2.26453 9.81408 2.28602 9.76467 2.3075C9.70451 2.33543 9.0299 2.995 7.5883 4.43445L5.50002 6.52059L3.40959 4.4323C1.74885 2.77156 1.30197 2.33543 1.22463 2.30105C1.10432 2.24949 0.938888 2.2323 0.827169 2.25809Z" fill="#2D3748"/>
-                                                    </g>
-                                                    <defs>
-                                                    <clipPath id="clip0_1347_921">
-                                                    <rect width="11" height="11" fill="white"/>
-                                                    </clipPath>
-                                                    </defs>
-                                                </svg>        
-                                            </NavLink>
-                                            <ul className="sub_menu">
-                                                <li>
-                                                    <NavLink to="/web-development">Web Development</NavLink>
-                                                </li>
-                                                <li>
-                                                    <NavLink to="/php-development">PHP Development</NavLink>
-                                                </li>
-                                                <li>
-                                                    <NavLink to="/shopify-development">Shopify Development</NavLink>
-                                                </li>
-                                                <li>
-                                                    <NavLink to="/open-source-development">Open Source</NavLink>
-                                                </li>
-                                            </ul>
-                                        </li>
+                                        {
+                                            windowWidth > 1024 ?
+                                            <li className={`has_sub_menu mega_menu_item ${activeSubMenus.includes(3) ? 'active_sub_menu' : ''}`}>
+                                                <NavLink to="/web-development">
+                                                    Web Development
+                                                    <FaChevronDown onClick={(e)=>{e.preventDefault(); handleSubMenu(3)}} />     
+                                                </NavLink>
+                                                <ul className="sub_menu mega_menu">  
+                                                    <li>
+                                                        <ul>
+                                                            <li>
+                                                                <NavLink to="/php-development">PHP Development</NavLink>
+                                                            </li>
+                                                        </ul>
+                                                        <ul>
+                                                            <li>
+                                                                <NavLink to="/shopify-development">Shopify Development</NavLink>
+                                                            </li>
+                                                        </ul>
+                                                        <ul>
+                                                            <li>
+                                                                <NavLink to="/open-source-development">Open Source</NavLink>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </li> : 
+                                            <li className={`has_sub_menu ${activeSubMenus.includes(3) ? 'active_sub_menu' : ''}`}>
+                                                <NavLink to="/web-development">
+                                                    Web Development
+                                                    <FaChevronDown onClick={(e)=>{e.preventDefault(); handleSubMenu(3)}} />     
+                                                </NavLink>
+                                                <ul className="sub_menu">                                                
+                                                    <li>
+                                                        <NavLink to="/php-development">PHP Development</NavLink>
+                                                    </li>
+                                                    <li>
+                                                        <NavLink to="/shopify-development">Shopify Development</NavLink>
+                                                    </li>
+                                                    <li>
+                                                        <NavLink to="/open-source-development">Open Source</NavLink>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        }
+                                        
                                         <li>
                                             <NavLink to="/digital-marketing">Digital Marketing</NavLink>
                                         </li>
                                         {/*<li className={`has_sub_menu ${activeSubMenus.includes(4) ? 'active_sub_menu' : ''}`}>
-                                            <NavLink to="/digital-marketing" onClick={(e)=>{e.preventDefault(); handleMobileSubMenu(4)}}>
+                                            <NavLink to="/digital-marketing" onClick={(e)=>{e.preventDefault(); handleSubMenu(4)}}>
                                                 Digital Marketing
-                                                <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <g clip-path="url(#clip0_1347_921)">
-                                                    <path d="M0.827169 2.25809C0.687521 2.29031 0.625216 2.33328 0.356662 2.59754C0.053732 2.89617 2.1064e-05 2.98641 2.1064e-05 3.21199C2.1064e-05 3.50848 -0.169705 3.31941 2.6383 6.12742C5.41194 8.9032 5.24651 8.75281 5.51076 8.75066C5.77072 8.74851 5.63752 8.87098 8.37893 6.11883C9.75608 4.73523 10.9055 3.56434 10.9356 3.51492C10.9828 3.43758 10.9893 3.4032 10.9893 3.22273C10.9893 3.04012 10.9828 3.00789 10.9313 2.92195C10.9012 2.86824 10.7594 2.71355 10.6197 2.57605C10.3211 2.28172 10.2524 2.24734 10.0074 2.26023C9.91721 2.26453 9.81408 2.28602 9.76467 2.3075C9.70451 2.33543 9.0299 2.995 7.5883 4.43445L5.50002 6.52059L3.40959 4.4323C1.74885 2.77156 1.30197 2.33543 1.22463 2.30105C1.10432 2.24949 0.938888 2.2323 0.827169 2.25809Z" fill="#2D3748"/>
-                                                    </g>
-                                                    <defs>
-                                                    <clipPath id="clip0_1347_921">
-                                                    <rect width="11" height="11" fill="white"/>
-                                                    </clipPath>
-                                                    </defs>
-                                                </svg>    
+                                                <FaChevronDown />    
                                             </NavLink>
                                             <ul className="sub_menu">
                                                 <li>
