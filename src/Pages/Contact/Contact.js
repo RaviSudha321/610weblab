@@ -6,7 +6,7 @@ import { FaXTwitter, FaFacebookF, FaInstagram, FaLinkedinIn, FaBehance } from "r
 import SuccessCounter from "../../Components/SuccessCounter/SuccessCounter";
 import { Helmet } from "react-helmet";
 import { useState } from "react";
-import emailjs from '@emailjs/browser';
+import { toast } from "react-toastify";
 
 
 function Contact(){
@@ -25,45 +25,51 @@ function Contact(){
         e.preventDefault();
         setIsLoading(true);
 
-        emailjs.sendForm(process.env.REACT_APP_EMAILJS_SERVICE_ID, process.env.REACT_APP_EMAILJS_TEMPLATE_ID, e.target, {
-            publicKey: process.env.REACT_APP_EMAILJS_PUBLIC_KEY,
-        })
-        .then(
-            (success) => {
-                if(success.status == 200 & success.text == "OK"){
-                    alert('form submitted');
-                    setFormData([]);
-                    setIsLoading(false);
-                }
-            },
-            (error) => {
-                console.log('FAILED...', error);
-                setIsLoading(false);
-            },
-        );
+        const newFormData = {
+            "name": formData.fullname || '',
+            "email": formData.email_address || '',
+            "phone": formData.phone_number || '',
+            "service": formData.service || '',
+            "message": formData.comment || '',
+        }
+        
+        try {
+            const response = await fetch('https://shopifyaid.com/wp-json/custom-forms/v1/submit-form', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json; charset=UTF-8',
+              },
+              body: JSON.stringify(newFormData)
+            });
+      
+            if (!response.ok) {
+                const data = await response.json();
+                toast.error(data.message,{
+                    theme: "colored",
+                })
+                throw new Error('Network response was not ok');
+            }
+            
+            const data = await response.json();
+            toast.success(data.message,{
+                theme: "colored",
+            })
+            setFormData({})
+            
+          } catch (error) {
+            console.error('Error submitting form:', error);
+            
+        } finally {
+            setIsLoading(false);
+        }
     }
 
     const socialMedia = [
-        {
-            icon:<FaFacebookF />, 
-            link:'https://www.facebook.com/610weblab/'
-        },
-        {
-            icon:<FaXTwitter />,    
-            link:'https://twitter.com/610Weblab/'
-        },
-        {
-            icon:<FaInstagram  itter />,    
-            link:'https://www.instagram.com/610weblab/'
-        },
-        {
-            icon:<FaLinkedinIn />,    
-            link:'https://www.linkedin.com/company/610-web-lab'
-        },
-        {
-            icon:<FaBehance />,
-            link:'https://www.behance.net/6Xweblab'
-        },
+        {icon:<FaFacebookF />, link:'https://www.facebook.com/610weblab/'},
+        {icon:<FaXTwitter />,link:'https://twitter.com/610Weblab/'},
+        {icon:<FaInstagram  itter />,link:'https://www.instagram.com/610weblab/'},
+        {icon:<FaLinkedinIn />,link:'https://www.linkedin.com/company/610-web-lab'},
+        {icon:<FaBehance />,link:'https://www.behance.net/6Xweblab'},
     ];
 
     return(

@@ -112,6 +112,14 @@
     padding: 25px 40px 30px;
     background-color: var(--light-blue);
     transition: all 0.2s linear;
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.header_menu li.active_sub_menu .mega_menu {
+    opacity: 1;
+    visibility: visible;
 }
 
 .sticky_header .header_menu .sub_menu.mega_menu {

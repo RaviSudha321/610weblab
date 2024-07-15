@@ -3,6 +3,7 @@ import Button from '../Button/Button';
 import './homeBanner.css';
 import emailjs from '@emailjs/browser';
 import { FaWhatsapp } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 function HomeBanner(){
 
@@ -20,22 +21,43 @@ function HomeBanner(){
         e.preventDefault();
         setIsLoading(true);
 
-        emailjs.sendForm(process.env.REACT_APP_EMAILJS_SERVICE_ID, process.env.REACT_APP_EMAILJS_TEMPLATE_ID, e.target, {
-            publicKey: process.env.REACT_APP_EMAILJS_PUBLIC_KEY,
-        })
-        .then(
-            (success) => {
-                if(success.status == 200 & success.text == "OK"){
-                    alert('form submitted');
-                    setFormData([]);
-                    setIsLoading(false);
-                }
-            },
-            (error) => {
-                console.log('FAILED...', error.text);
-                setIsLoading(false);
-            },
-        );
+        const newFormData = {
+            "name": formData.fullname || '',
+            "email": formData.email_address || '',
+            "phone": formData.phone_number || '',
+            "service": formData.service || '',
+            "message": formData.comment || '',
+        }
+
+        try {
+            const response = await fetch('https://shopifyaid.com/wp-json/custom-forms/v1/submit-form', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json; charset=UTF-8',
+              },
+              body: JSON.stringify(newFormData)
+            });
+      
+            if (!response.ok) {
+                const data = await response.json();
+                toast.error(data.message,{
+                    theme: "colored",
+                })
+                throw new Error('Network response was not ok');
+            }
+            
+            const data = await response.json();
+            toast.success(data.message,{
+                theme: "colored",
+            })
+            setFormData({})
+            
+          } catch (error) {
+            console.error('Error submitting form:', error);
+            
+        } finally {
+            setIsLoading(false);
+        }
     }
 
     return(
