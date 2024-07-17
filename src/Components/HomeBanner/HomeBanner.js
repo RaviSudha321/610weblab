@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Button from '../Button/Button';
 import './homeBanner.css';
-import emailjs from '@emailjs/browser';
 import { FaWhatsapp } from "react-icons/fa";
 import { toast } from "react-toastify";
 
