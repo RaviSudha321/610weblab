@@ -22,7 +22,7 @@ function Careers(){
             <ImageText 
             title="One Team, One Heart, One Legacy."
             description="At eSparkBiz, we cultivate a positive workplace where happy employees are our top priority. Our work culture ensures we hire the right people and give them the freedom for creativity and a result-driven work atmosphere to solve incremental challenges and add value. Career growth is most important for work satisfaction, and we provide ample opportunities, infrastructure, and work environment to our employees to achieve it."
-            buttons={<Button title="Join Our Team" link="#" />}
+            buttons={<Button title="Join Our Team" link="/contact-us" />}
             imageUrl="images/team-trip.webp"
             imageWidth="630"
             />

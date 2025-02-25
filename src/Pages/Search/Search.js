@@ -6,30 +6,40 @@ import PageBanner from "../../Components/PageBanner/PageBanner";
 import Testimonials from "../../Components/Testimonials/Testimonials";
 import { Helmet } from "react-helmet";
 import { useEffect, useState } from "react";
+import Loading from '../../Components/Loading/Loading';
 
 function Search(){
 
     const {keyword} = useParams();
     const [searchResults, setSearchResults] = useState([]);
-
-    const getPosts = async () => {
-        try {
-            const response = await fetch(process.env.REACT_APP_REST_API_URL+'/posts?search='+keyword+'&_embed');
-            if(!response.ok){
-                console.log('search api not working');
-                return;
-            }
-            const data = await response.json();
-            setSearchResults(data);
-        }
-        catch (error) {
-            console.log('search error', error);
-        }
-    }
+    const [loading, setLoading] = useState(false);
 
     useEffect(()=>{
+        const getPosts = async () => {
+            if (!keyword) return;
+            try {
+                setLoading(true);
+                const response = await fetch(process.env.REACT_APP_REST_API_URL+'/posts?search='+keyword+'&_embed');
+                if(!response.ok){
+                    console.log('search api not working');
+                    return;
+                }
+                const data = await response.json();
+                setSearchResults(data);
+            }
+            catch (error) {
+                console.log('search error', error);
+            } finally {
+                setLoading(false);
+            }
+        }
+
         getPosts();
-    },[])
+    },[keyword]);
+
+    if(loading){
+        return <Loading />
+    }
 
     return(
         <div className="search_result_page">

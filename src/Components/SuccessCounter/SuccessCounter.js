@@ -3,11 +3,18 @@ import './successCounter.css';
 
 
 function SuccessCounter(){
+
+    const counters = [
+        { number: 300, title: "Successful Projects" },
+        { number: 97, title: "Success Rate" },
+        { number: 1500, title: "Happy Clients" }
+    ];
+
     return(
         <div className='success_counter'>
-            <SuccessCounterItem number="300" title="Successful Projects" />
-            <SuccessCounterItem number="97" title="Success Rate" />
-            <SuccessCounterItem number="1500" title="Happy Clients" />
+            {counters.map((counter, index) => {
+                return <SuccessCounterItem key={index} number={counter.number} title={counter.title} />
+            })}
         </div>
     )
 }

@@ -1,7 +1,7 @@
 import './contactBox.css';
 
 
-function ContactBox({title, description, link, linkText, socialMedia}){
+function ContactBox({title, description, link, linkText="visit", socialMedia}){
 
     return(
         <div className="contact_box">

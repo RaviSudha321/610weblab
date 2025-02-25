@@ -1,38 +1,45 @@
 import BlogBox from '../BlogBox/BlogBox';
 import './blogsGrid.css';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Loading from '../Loading/Loading';
+import ScrollToTop from '../ScrollToTop/ScrollToTop';
 
 
 function BlogsGrid(){
 
     const [blogs, setBlogs] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [perPage, setPerPage] = useState(2);
     const [offset, setOffset] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
+    const perPage = 3;
 
-    const getAllBlogs = async()=>{
-        try {
-            const response = await fetch(`${process.env.REACT_APP_REST_API_URL}/posts?_embed`);
-            if(!response.ok){
-                console.log('All blogs fetch issue');
-                setIsLoading(false);
-                return;
+    useEffect(() => {
+        const getAllBlogs = async()=>{
+            try {
+                setIsLoading(true);
+                const response = await fetch(`${process.env.REACT_APP_REST_API_URL}/posts?_embed`);
+                if(!response.ok){
+                    console.log('All blogs fetch issue');
+                    setIsLoading(false);
+                    return;
+                }
+                const data = await response.json();
+                setTotalPages(Math.ceil(data.length / perPage));
             }
-            const data = await response.json();
-            setTotalPages(data.length / perPage);
-            setIsLoading(false);
+            catch (error) {
+                console.log('blogs error', error);
+            } finally {
+                setIsLoading(false);
+            }
         }
-        catch (error) {
-            console.log('blogs error', error);
-            setIsLoading(false);
-        }
-    }
 
-    const getBlogs = async() => {
+        getAllBlogs();
+    },[]);
+
+    const getBlogs = useCallback( async() => {
         try {
+            setIsLoading(true);
             const response = await fetch(`${process.env.REACT_APP_REST_API_URL}/posts?_embed&page=${currentPage}&per_page=${perPage}&offset=${offset}`);
             if(!response.ok){
                 console.log('Blogs fetch issue');
@@ -41,33 +48,25 @@ function BlogsGrid(){
             }
             const data = await response.json();
             setBlogs(data);
-            setIsLoading(false);
         }
         catch (error) {
             console.log('blogs error', error);
+        } finally {
             setIsLoading(false);
         }
-    }
+    }, [currentPage, perPage])
+
+    useEffect(()=>{
+        getBlogs();
+    },[getBlogs]);
 
     const handlePagination = (page) => {
         if(page) {
+            window.scrollTo(0,0);
             setCurrentPage(page);
             setOffset(perPage*(page-1));
         }
     }
-
-    useEffect(()=>{
-        const fetchData = async () => {
-            await getAllBlogs();
-            await getBlogs();
-        };
-      
-        fetchData();
-    },[])
-
-    useEffect(()=>{
-        getBlogs();
-    }, [currentPage])
 
     return(
         <section className='blogs_grid_sec'>

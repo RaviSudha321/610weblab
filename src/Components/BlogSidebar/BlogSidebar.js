@@ -1,5 +1,5 @@
 import './blogSidebar.css';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 
 function BlogSidebar({currentPost}){
@@ -9,7 +9,7 @@ function BlogSidebar({currentPost}){
     const [searchKeyword, setSearchKeyword] = useState('');
     const navigate = useNavigate();
 
-    const getCategories = async() => {
+    const getCategories = useCallback(async() => {
         try {
             const response = await fetch(process.env.REACT_APP_REST_API_URL+'/categories');
             if(!response.ok){
@@ -22,11 +22,15 @@ function BlogSidebar({currentPost}){
         catch (error){
             console.log('categories error', error);
         }
-    }
+    }, []);
 
-    const getRecentPosts = async() => {
+    const getRecentPosts = useCallback(async() => {
         try {
-            const response = await fetch(process.env.REACT_APP_REST_API_URL+'/posts?_embed&exclude='+currentPost);
+            let url = `${process.env.REACT_APP_REST_API_URL}/posts?_embed`;
+            if (currentPost) {
+                url += `&exclude=${currentPost}`;
+            }
+            const response = await fetch(url);
             if(!response.ok){
                 console.log('recent posts not fetched');
                 return;
@@ -37,7 +41,7 @@ function BlogSidebar({currentPost}){
         catch (error){
             console.log('recent posts error', error);
         }
-    }
+    }, [currentPost]);
 
     function formatDate(dateString) {
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -48,7 +52,8 @@ function BlogSidebar({currentPost}){
         setSearchKeyword(value);
     }
     
-    const handleSearchSubmit = () => {
+    const handleSearchSubmit = (e) => {
+        e.preventDefault();
         navigate('/search/'+searchKeyword);
     }
 
@@ -74,11 +79,11 @@ function BlogSidebar({currentPost}){
                         {
                             categories.map((category, index)=>{
                                 return (
-                                    <React.Fragment key={index}>
+                                    <React.Fragment key={category.id}>
                                         {
                                             category.count > 0 &&
                                                 <li className='category_list_item'>
-                                                <NavLink to="#">
+                                                <NavLink to={`/category/${category.slug}`}>
                                                     <span className='category_name'>{category.name}</span>
                                                     <span className='category_posts_count'>({category.count})</span>
                                                 </NavLink>
@@ -100,7 +105,7 @@ function BlogSidebar({currentPost}){
                         {
                             recentPosts.map((post, index)=>{
                                 return(
-                                    <li className='recent_news_item' key={index}>
+                                    <li className='recent_news_item' key={post.id}>
                                         {
                                             post._embedded 
                                             ? <img src={post._embedded['wp:featuredmedia']['0'].source_url} alt={post.title.rendered} className='news_img' />
@@ -129,7 +134,7 @@ function BlogSidebar({currentPost}){
             }
             <div className='sidebar_widget sidebar_adds'>
                 <div className='sidebar_add_banner'>
-                    <img src="images/add-banner.webp" alt="image" />
+                    <img src="/images/add-banner.webp" alt="image" />
                 </div>
             </div>
         </div>

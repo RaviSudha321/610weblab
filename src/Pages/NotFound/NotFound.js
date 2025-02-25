@@ -1,5 +1,4 @@
 import Button from "../../Components/Button/Button";
-import PageBanner from "../../Components/PageBanner/PageBanner";
 import { Helmet } from "react-helmet";
 
 function NotFound(){
@@ -8,9 +7,6 @@ function NotFound(){
             <Helmet>
                 <title>404 Page</title>
             </Helmet>
-            <PageBanner 
-            title="Not Found"
-            />
             <section className="not_found_sec">
                 <div className="container">
                     <div className="not_found_content">

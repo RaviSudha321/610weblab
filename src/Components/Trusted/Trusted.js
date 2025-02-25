@@ -8,6 +8,7 @@ function Trusted(){
         smartSpeed: 1500,
         dots: false,
         nav: false,
+        autoplay: true,
         responsive: {
           0: {
             margin: 20,

@@ -12,11 +12,16 @@ function TechTag({title, description}){
                     <div className='tech_tag_description'>
                         {description &&
                         <div className='description'>
-                            {description.map((item, index)=>{
-                                return(
-                                    <p key={index}>{item}</p>
-                                )
-                            })}
+                            {
+                                Array.isArray(description) ? 
+                                    description.map((item, index)=>{
+                                        return(
+                                            <p key={index}>{item}</p>
+                                        )
+                                    })
+                                : 
+                                <p>{description}</p>
+                            }
                         </div>
                         }
                     </div>

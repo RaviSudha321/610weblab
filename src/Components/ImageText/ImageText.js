@@ -1,7 +1,7 @@
 import './imageText.css';
 
 
-function ImageText({backgroundImageUrl, backgroundColor, title, description, buttons, imageUrl, imagePosition, imageWidth, content, contentAboveButton}){
+function ImageText({backgroundImageUrl, backgroundColor="#ffffff", title, description, buttons, imageUrl, imageAltTag="image", imagePosition, imageWidth, content, contentAboveButton}){
     return(
         <section className='image_text_sec' style={backgroundImageUrl ? {backgroundImage:"url("+backgroundImageUrl+")",backgroundPosition:"center",backgroundSize:"cover"} : {backgroundColor:backgroundColor} }>
             <div className='container'>
@@ -28,7 +28,7 @@ function ImageText({backgroundImageUrl, backgroundColor, title, description, but
                     <div className='image_text_right_col'>
                         {imageUrl &&
                             <div className='image_area'>
-                                <img src={imageUrl} alt="image" style={imageWidth && {maxWidth:imageWidth+"px"}} />
+                                <img src={imageUrl} alt={imageAltTag} style={imageWidth && {maxWidth:imageWidth+"px"}} />
                             </div>
                         }
                     </div>

@@ -65,6 +65,10 @@
     line-height: 1.5;
 }
 
+.header_menu ul li a svg {
+    font-size: 12px;
+}
+
 .header_menu ul li a:hover,
 .header_menu ul li a.active {
     color: var(--light-blue);
@@ -89,19 +93,9 @@
     width: 100%;
 }
 
-.header_menu ul.sub_menu li a {
-    display: block;
-    padding: 5px 15px;
-}
-
 .header_menu li.active_sub_menu .sub_menu {
     display: block;
 }
-
-/* .header_menu li.has_sub_menu a:hover+.sub_menu, */
-/* .header_menu li.has_sub_menu .sub_menu:hover {
-    display: block;
-} */
 
 /** Mega Menu Css Start***/
 .header_menu .sub_menu.mega_menu {
@@ -110,11 +104,13 @@
     width: 100%;
     top: 100px;
     padding: 25px 40px 30px;
-    background-color: var(--light-blue);
+    background-color: #fff;
+    border-top: 1px solid var(--light-blue);
     transition: all 0.2s linear;
     display: block;
     opacity: 0;
     visibility: hidden;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
 }
 
 .header_menu li.active_sub_menu .mega_menu {
@@ -126,36 +122,38 @@
     top: 80px;
 }
 
+.header_menu .sub_menu ul {
+    gap: 15px;
+}
+
 .header_menu .sub_menu.mega_menu>li {
     max-width: 1440px;
     margin-inline: auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     column-gap: 50px;
+    align-items: start;
 }
 
 .header_menu ul.sub_menu.mega_menu li a {
-    color: #fff;
+    color: var(--light-blue);
     text-align: left;
     width: fit-content;
     position: relative;
-    padding: 5px 0;
 }
 
-.header_menu ul.sub_menu.mega_menu li a:after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 1px;
-    width: 0;
-    background-color: #fff;
-    transition: all 0.25s linear;
+.header_menu ul.sub_menu li svg {
+    font-size: 20px;
 }
 
-.header_menu ul.sub_menu.mega_menu li a.active:after,
-.header_menu ul.sub_menu.mega_menu li a:hover:after {
-    width: 100%;
+.header_menu ul.sub_menu li a.active path:not(:first-child),
+.header_menu ul.sub_menu li a:hover path:not(:first-child) {
+    fill: #072e75;
+}
+
+.header_menu ul.sub_menu.mega_menu li a:hover,
+.header_menu ul.sub_menu.mega_menu li a.active {
+    color: #072e75;
 }
 
 /** Mega Menu Css End **/
@@ -163,11 +161,6 @@
 
 .header_menu ul li a path {
     transition: all 0.2s linear;
-}
-
-.header_menu ul li a:hover path,
-.header_menu ul li a.active path {
-    fill: var(--light-blue);
 }
 
 .header_menu ul.sub_menu:not(.mega_menu) li a {
@@ -179,11 +172,6 @@
     border-bottom: 1px solid #fff;
     text-align: left;
 }
-
-/* .header_menu ul.sub_menu li a:hover,
-.header_menu ul.sub_menu li a.active {
-    background-color: var(--dark-blue);
-} */
 
 .header_content .menu_toggle {
     font-size: 30px;
@@ -253,7 +241,6 @@
 
 @media (max-width:1024px) {
 
-    /* .header_menu li.has_sub_menu a:hover+.sub_menu, */
     .header_menu li.has_sub_menu .sub_menu:hover {
         display: block;
         position: absolute;
@@ -304,6 +291,10 @@
 
     .header_right_col_content .global_btn {
         padding-inline: 25px;
+    }
+
+    .header_right_col_content .global_btn a img {
+        filter: brightness(0) invert(1);
     }
 
     .header_content .header_menu ul li a path {

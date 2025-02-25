@@ -1,6 +1,5 @@
 import './copyright.css';
 
-
 function Copyright(){
     return(
         <section className='copyright_sec'>

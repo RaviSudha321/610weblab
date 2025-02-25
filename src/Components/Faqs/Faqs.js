@@ -25,7 +25,7 @@ function Faqs(){
 
     useEffect(()=>{
         getFaqs();
-    },[])
+    },[process.env.REACT_APP_REST_API_URL])
 
     const handleClick = (index) => {
         if(activeItem == index){
@@ -47,7 +47,7 @@ function Faqs(){
                                 return(
                                     <div className={`faq_item ${activeItem == index ? 'active' : ''}`} onClick={()=>handleClick(index)} key={index}>
                                         <h4 className='question' dangerouslySetInnerHTML={{__html: faq.title.rendered}}></h4>
-                                        <span className='icon'>{activeItem == 0 ? <FaMinus /> : <FaPlus />}</span>
+                                        <span className='icon'>{activeItem == index ? <FaMinus /> : <FaPlus />}</span>
                                         <div className='answer' dangerouslySetInnerHTML={{__html: faq.content.rendered}}></div>
                                     </div>
                                 )

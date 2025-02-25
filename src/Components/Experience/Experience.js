@@ -31,7 +31,7 @@ function Experience(){
                         }
                     />
                     <div className='team_img'>
-                        <img src="images/team.webp" alt="team image" />
+                        <img src="/images/team.webp" alt="team" />
                     </div>
                 </div>
             </div>

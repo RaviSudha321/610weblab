@@ -1,7 +1,7 @@
 import Button from '../Button/Button';
 import BlogBox from '../BlogBox/BlogBox';
 import './blogsCarousel.css';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css'; 
@@ -39,9 +39,8 @@ function BlogsCarousel(){
     };
     
     const [blogs, setBlogs] = useState([]);
-
       
-    const getBlogs = async () => {
+    const getBlogs = useCallback(async () => {
       try{
         const response = await fetch(process.env.REACT_APP_REST_API_URL+'/posts?_embed');
         if(!response.ok){
@@ -53,11 +52,11 @@ function BlogsCarousel(){
       catch (error) {
         console.log('blogs not fetch', error);
       }
-    } 
+    }, [])
     
     useEffect(()=>{
       getBlogs();
-    },[])
+    },[process.env.REACT_APP_REST_API_URL])
 
     return(
         <section className='blogs_sec'>
@@ -75,16 +74,19 @@ function BlogsCarousel(){
                     </div>
                 </div>
                 {
-                  blogs.length > 0 &&
-                  <OwlCarousel className="owl-theme blogs_carousel" {...options}>  
-                  {
-                    blogs.map((blog, index)=>{
-                      return(
-                        <BlogBox blog={blog} key={index} />
-                      )
-                    })
-                  }
-                  </OwlCarousel>
+                  blogs.length > 0 ?
+                  <div className='blogs_carousel_outer'>
+                    <OwlCarousel className="owl-theme blogs_carousel" {...options}>  
+                    {
+                      blogs.map((blog, index)=>{
+                        return(
+                          <BlogBox blog={blog} key={index} />
+                        )
+                      })
+                    }
+                    </OwlCarousel>
+                  </div>
+                  : <p className="error_message">No blogs available at the moment.</p>
                 }
             </div>
         </section>

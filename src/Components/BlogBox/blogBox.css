@@ -5,23 +5,28 @@
     position: relative;
     padding-bottom: 80px;
 }
+
 .blog_img img {
     border-radius: 10px 10px 0 0;
 }
+
 .blog_content {
     padding: 15px 20px 20px;
 }
+
 .blog_title {
     font-size: 20px;
     line-height: 1.6;
     font-weight: 600;
     color: var(--text-color);
 }
+
 .blog_desc {
     color: var(--text-color);
     margin-top: 8px;
     line-height: 1.87;
 }
+
 .blog_actions {
     margin-top: 30px;
     display: flex;
@@ -31,6 +36,7 @@
     bottom: 20px;
     width: calc(100% - 40px);
 }
+
 .blog_item .blog_link {
     position: absolute;
     inset: 0;

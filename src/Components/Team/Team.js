@@ -22,15 +22,15 @@ function Team(){
         }
     }
 
+    useEffect(()=>{
+        getTeam();
+    },[]);
+
     const handleCatClick = (cat) => {
         if (teamCat !== cat) {
             setTeamCat(cat);
         }
     }
-
-    useEffect(()=>{
-        getTeam();
-    },[]);
 
     return(
         <section className='team_sec'>
@@ -39,8 +39,8 @@ function Team(){
                 <p className='description'>Talent wins games, but teamwork and intelligence win championships.</p>
                 <div className='team_content'>
                     <ul className='team_filters'>
-                       <li data-title="ceo" onClick={()=>{handleCatClick('ceo')}} className={teamCat == 'ceo' && 'active'}>CEO</li> 
-                       <li data-title="team" onClick={()=>{handleCatClick('team')}} className={teamCat == 'team' && 'active'}>Team</li>
+                       <li data-title="ceo" onClick={()=>{handleCatClick('ceo')}} className={teamCat === 'ceo' && 'active'}>CEO</li> 
+                       <li data-title="team" onClick={()=>{handleCatClick('team')}} className={teamCat === 'team' && 'active'}>Team</li>
                     </ul>
                     {
                         team.length > 0 &&
@@ -48,7 +48,7 @@ function Team(){
                             {
                                 team.map((member, index)=>{
                                     return(
-                                        <div className={`member_box ${teamCat == member._embedded['wp:term']['0']['0'].slug ? 'active' : 'hidden'}`} data-cat={member._embedded['wp:term']['0']['0'].slug} key={index}>
+                                        <div className={`member_box ${teamCat === member._embedded['wp:term']['0']['0'].slug ? 'active' : 'hidden'}`} data-cat={member._embedded['wp:term']['0']['0'].slug} key={index}>
                                             <div className='member_img'>
                                                 <img src={member._embedded['wp:featuredmedia']['0'].source_url} alt={member.title.rendered} />
                                             </div>
