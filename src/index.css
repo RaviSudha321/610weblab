@@ -176,6 +176,12 @@ form#discuss_form {
   background-color: var(--dark-blue);
 }
 
+#discuss_form input.has_error,
+#discuss_form select.has_error,
+#discuss_form textarea.has_error {
+  border-color: #f00;
+}
+
 #discuss_form .select_field:after {
   content: '';
   position: absolute;
@@ -224,7 +230,6 @@ form#discuss_form {
   background-size: cover;
   background-position: center;
 }
-
 
 .lds-dual-ring,
 .lds-dual-ring:after {
